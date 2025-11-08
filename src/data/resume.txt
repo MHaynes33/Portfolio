@@ -1,0 +1,62 @@
+
+MIKE HAYNES 
+RALEIGH, NC | 731-478-7815 | MIKEHAYNES357@GMAIL.COM | LINKEDIN 
+
+CORE COMPETENCIES 
+Business Intelligence & Reporting – Power BI | Tableau | Operational Reporting | KPI Dashboards | Risk Management 
+Financial Analytics – Budgeting | Forecasting & Variance Analysis | Ratio Analysis | FP&A | Cost Planning 
+Data Engineering & Modeling – SQL | ETL Pipelines | Process Automation | Machine Learning | Statistical Analysis | Python | R 
+Enterprise Systems & Analytics – SAP S/4HANA | Infor EAM | SaaS Implementation | ERP Integration | Hyperion 
+CAREER HIGHLIGHTS 
+SCRA Re-amortization Automation (Navy Federal Credit Union): Developed an automated SCRA re-amortization model integrating interest recalculations, refund methodologies, and compliance adjustments; collaborated across 3 organizations and 9 teams to transform 300 research hours into an automation that influenced a major organizational shift in compliance adherence policies. 
+Global Asset Management Program (Ecobat): Directed multinational overhaul of asset management operations, establishing unified cost governance and material tracking standards. Enhanced forecasting accuracy and achieved a 1.3% cost reduction. Warehouse Efficiency & Predictive Analytics (Red Stag): Engineered ETL pipelines and predictive models to synchronize order data and optimize warehouse layout—achieving a 30% reduction in processing times and an 8% efficiency boost. 
+PROFESSIONAL EXPERIENCE 
+Senior Business Intelligence Analyst, Navy Federal Credit Union, Raleigh, North Carolina | April 2024 – Current 
+•
+Mentoring & Adoption: Lead a structured development program on SQL optimization, Power BI, GitHub workflows, andmodeling fundamentals. Elevate analyst performance, standardize best practices, and improve reporting accuracy across REL.
+
+•
+Credit Risk Exposure: Lead development of NFCU’s first unified credit-risk reporting platform, aligning origination andservicing logic across REL, Lending, and Data Solutions. Redefining executive visibility into credit exposure.
+
+•
+REL Production Reporting: Reengineered the underwriting performance dashboard using dynamic ranking and scoring logic.Drove a 23% reduction in employee errors and improved transparency in production performance.
+
+•
+Lender Performance Executive Board: Designed an executive benchmarking dashboard comparing NFCU’s performanceagainst peer institutions. Identified competitive gaps, influenced lending strategy, and earned recognition in RERM andenterprise town halls.
+
+
+Senior Business Analyst, Ecobat, Dallas, Texas | April 2022 – April 2024 
+•
+Recipe Adherence & Strategic Cost Optimization: Drove a $3M cost reduction by establishing governance standards,embedding operational analytics, and aligning production compliance with enterprise cost-containment strategies.
+
+•
+Operational Leadership & Cross-Functional Coordination: Partnered with IT, Finance, and Operations leadership to defineglobal standards, unify data definitions, and align cost controls with executive strategy.
+
+•
+Financial KPI & Cost Reporting: Developed Power BI dashboards to track production costs, material usage, and operationalexpenses, enhancing cost variance analysis and financial forecasting accuracy.
+
+
+Senior Business Analyst, Red Stag, Oak Ridge, Tennessee | May 2020 – May 2022 
+•
+Analytics Modernization & Automation: Led the migration of manual financial and operational reports to Tableau,automating liquidity forecasting and KPI tracking across logistics and fulfillment operations.
+
+•
+Data Insights & Cost Optimization: Used advanced SQL and Python analysis to identify process inefficiencies and cost-reduction opportunities, improving profitability and throughput across warehouse operations.
+
+•
+Forecasting & Performance Management: Designed predictive models to forecast demand and optimize logistics capacity,improving delivery accuracy and on-time performance by 10%.
+
+
+Operations Manager, M-Street, Nashville, Tennessee | May 2017 – May 2020 
+•
+Culture & People Leadership: Established a culture of ownership and performance. Partnered with senior leadership todefine staffing models, training programs, and succession plans that strengthened retention and capability.
+
+•
+Procurement & Cost Reduction: Directed daily operations while aligning workflows with executive goals. Introducedstandardized reporting, improving visibility, cost control, and throughput across business units.
+
+
+EDUCATION
+B.S. Business Analytics University of Tennessee 
+May 2017 Knoxville 
+
+
