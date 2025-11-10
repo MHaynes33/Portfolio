@@ -8,7 +8,7 @@ Financial Analytics � Budgeting | Forecasting & Variance Analysis | Ratio Anal
 Data Engineering & Modeling � SQL | ETL Pipelines | Process Automation | Machine Learning | Statistical Analysis | Python | R 
 Enterprise Systems & Analytics � SAP S/4HANA | Infor EAM | SaaS Implementation | ERP Integration | Hyperion 
 CAREER HIGHLIGHTS 
-SCRA Re-amortization Automation (Navy Federal Credit Union): Developed an automated SCRA re-amortization model integrating interest recalculations, refund methodologies, and compliance adjustments; collaborated across 3 organizations and 9 teams to transform 300 research hours into an automation that influenced a major organizational shift in compliance adherence policies. 
+SCRA Re-Amortization Automation (Navy Federal Credit Union): Developed an automated SCRA re-amortization model integrating interest recalculations, refund methodologies, and compliance adjustments; collaborated across 3 organizations and 9 teams to transform 300 research hours into an automation that influenced a major organizational shift in compliance adherence policies. 
 Global Asset Management Program (Ecobat): Directed multinational overhaul of asset management operations, establishing unified cost governance and material tracking standards. Enhanced forecasting accuracy and achieved a 1.3% cost reduction. Warehouse Efficiency & Predictive Analytics (Red Stag): Engineered ETL pipelines and predictive models to synchronize order data and optimize warehouse layout�achieving a 30% reduction in processing times and an 8% efficiency boost. 
 PROFESSIONAL EXPERIENCE 
 Senior Business Intelligence Analyst, Navy Federal Credit Union, Raleigh, North Carolina | April 2024 � Current 
