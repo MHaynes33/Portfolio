@@ -1,30 +1,41 @@
 site:
-  name: AstroWind
-  site: 'https://astrowind.vercel.app'
+  name: "Mike Haynes"
+  site: 'https://mikehaynes.vercel.app'
   base: '/'
   trailingSlash: false
 
   googleSiteVerificationId: orcPxI47GSa-cRvY11tUe6iGg2IO_RPvnA1q95iEM3M
 
+# Author / contact
+author:
+  name: "Mike Haynes"
+  role: "Business Intelligence · Operational Strategy · Decision Systems"
+  summary: "Executive leader who converts complex data into strategic advantage, designs decision systems that scale, and optimizes operations to deliver measurable business outcomes."
+  email: "mikehaynes357@gmail.com"
+  linkedin: "https://www.linkedin.com/in/mike-haynes33/"
+  twitter: "https://x.com/HaynesMike65079"
+ # instagram: "https://www.instagram.com/mikehaynes1289/"
+ # tiktok: "https://www.tiktok.com/@mikehaynes03"
+
 # Default SEO metadata
 metadata:
   title:
-    default: AstroWind
-    template: '%s — AstroWind'
-  description: "\U0001F680 Suitable for Startups, Small Business, Sass Websites, Professional Portfolios, Marketing Websites, Landing Pages & Blogs."
+    default: "Mike Haynes"
+    template: '%s — Mike Haynes'
+  description: "Executive leader focused on Business Intelligence, Operational Strategy, and Decision Systems — turning complex data into high-confidence decisions, streamlining operations, and delivering measurable results."
   robots:
     index: true
     follow: true
   openGraph:
-    site_name: AstroWind
+    site_name: "Mike Haynes"
     images:
       - url: '~/assets/images/default.png'
         width: 1200
         height: 628
     type: website
   twitter:
-    handle: '@arthelokyo'
-    site: '@arthelokyo'
+    handle: '@HaynesMike65079'
+    site: '@HaynesMike65079'
     cardType: summary_large_image
 
 i18n:
@@ -33,7 +44,7 @@ i18n:
 
 apps:
   blog:
-    isEnabled: true
+    isEnabled: false
     postsPerPage: 6
 
     post:
