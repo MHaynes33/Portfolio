@@ -58,11 +58,6 @@ const projects = [
   :root[data-theme="sand"]    { --bg:#f4f2ef; --fg:#0f172a; --muted:#6b7280; }
   :root[data-theme="slate"]   { --bg:#f4f2ef; --fg:#0f172a; --muted:#6b7280; }
   :root[data-theme="contact"] { --bg:#f4f2ef; --fg:#0f172a; --muted:#6b7280; }
-    :root[data-theme="sand"]    #sticky-title,
-    :root[data-theme="slate"]   #sticky-title,
-    :root[data-theme="contact"] #sticky-title {
-      background: linear-gradient(to bottom, rgba(255,255,255,.85), rgba(255,255,255,0));
-    }
 
   html { scroll-behavior:smooth; }
   html, body { background: var(--bg); color: var(--fg); }
@@ -82,7 +77,13 @@ const projects = [
 
   /* Sections */
   .section { min-height:100vh; display:grid; align-items:center; background: var(--bg); color: var(--fg); }
-  .section-hero { min-height: min(88vh, 760px); padding-top: clamp(5rem, 12vh, 7rem); padding-bottom: clamp(2.5rem, 8vh, 4rem); }
+  .section-hero { min-height: min(86vh, 740px); /* move content down slightly, but trim the bottom so About isn’t too far */ padding-top: clamp(3.5rem, 10vh, 6rem); padding-bottom: clamp(1.25rem, 5vh, 2.25rem); }
+
+  .hero-blurb { margin-top: .85rem; }
+  .cta { margin-top: 2rem; }
+  @media (min-width: 980px){
+    .cta { margin-top: 3rem; }
+  }
   .container { width:100%; max-width:1200px; margin:0 auto; padding:0 1.5rem; transition: color .35s ease, background-color .35s ease; }
 
   /* Grid / cards (single definitions) */
@@ -170,14 +171,7 @@ const projects = [
     </nav>
   </aside>
 
-  <div id="sticky-title" aria-live="polite"
-    style="position:sticky; top:0; z-index:40; padding:.5rem 0; margin-left:86px; left:86px; right:auto;
-        background: linear-gradient(to bottom, rgba(255,255,255,0.9), rgba(255,255,255,0));
-        pointer-events:none; opacity:0; visibility:hidden; transition:opacity .25s ease, visibility .25s ease;">
-    <div id="sticky-title-text" class="wrap"
-      style="font-size:clamp(1rem,2.5vw,1.25rem); font-weight:600; max-width:calc(100% - 24px); overflow:hidden; white-space:nowrap; text-overflow:ellipsis;">
-    </div>
-  </div>
+  
 
   <!-- MAIN CONTENT -->
   <main class="content">
@@ -185,16 +179,19 @@ const projects = [
   <!-- HERO -->
     <section id="home" class="section section-hero" data-theme="hero" data-spy-section>
       <div class="wrap">
-        <p style="color:var(--muted); margin-bottom:.5rem;"></p>
-        <h1 id="hero-name" class="h0">Mike Haynes</h1>
-        <h2 class="h2" style="font-weight:450; margin-top:.25rem;">Business Intelligence · Operational Strategy · Decision Systems</h2>
-        <p class="lead" style="margin-top:1.25rem;">
-          Builds clear decision systems. Turns messy data into reliable operations.
-        </p>
-        <div style="margin-top:3rem; margin-bottom:3rem; display:flex; gap:1rem;">
-          <a href="#credit-risk" class="btn btn-primary">View Projects</a>
-          <a href="/resume.pdf" class="btn btn-outline" download="Mike_Haynes_Resume.pdf">Download Résumé</a>
-        </div>
+  <p style="color:var(--muted); margin-bottom:.5rem;"></p>
+  <h1 id="hero-name" class="h0">Mike Haynes</h1>
+  <h2 class="h2">Business Intelligence · Operational Strategy · Decision Systems</h2>
+
+  <!-- David-style two-line blurb -->
+  <p class="lead hero-blurb">Business intelligence and operations strategist based in Raleigh.</p>
+  <p class="lead hero-blurb">Senior analyst at Navy Federal, focused on risk dashboards and decision systems leaders actually use.</p>
+
+  <!-- CTA moved lower via .cta margin -->
+  <div class="cta" style="display:flex; gap:1rem; flex-wrap:wrap;">
+    <a href="#credit-risk" class="px-5 py-3 bg-gray-900 text-white rounded">View Projects</a>
+    <a href="/resume.pdf" class="px-5 py-3 border rounded">Download Résumé</a>
+  </div>
       </div>
     </section>
 
@@ -323,8 +320,7 @@ const projects = [
         setActive(id);
         applyTheme(entry.target);
         history.replaceState(null, '', '#' + id); // passive hash update
-  // update sticky title when section becomes active
-  updateStickyTitle(id);
+  
   console.debug("[spy]", id);
       }
     });
@@ -359,7 +355,7 @@ const projects = [
   // On load, set based on current hash or first section
   window.addEventListener('load', () => {
     const current = document.getElementById(location.hash.replace('#','')) || sections[0];
-    if (current) { setActive(current.id); applyTheme(current); updateStickyTitle(current.id); }
+    if (current) { setActive(current.id); applyTheme(current); }
   });
 
   // When a rail link is clicked, smooth-scroll to section and focus its first heading for accessibility
@@ -388,35 +384,6 @@ const projects = [
       });
     }
   });
-
-  // Sticky title map and helper (projects -> title)
-  const map = {};
-  sections.forEach(sec => {
-    const id = sec.id;
-    if (id === 'home' || id === 'about') { map[id] = ''; return; }
-    const titleEl = sec.querySelector('h3,h2,h1');
-    map[id] = titleEl ? titleEl.textContent.trim() : '';
-  });
-  const sticky = document.getElementById('sticky-title');
-  const stickyText = sticky?.firstElementChild;
-  const heroName = document.getElementById('hero-name');
-
-  function fadeHeroName(show){
-    if (!heroName) return;
-    heroName.style.transition = 'opacity .25s ease';
-    heroName.style.opacity = show ? '1' : '0';
-  }
-
-  function updateStickyTitle(id){
-    if (!sticky || !stickyText) return;
-    const title = map[id] || '';
-    const show = title.length > 0;
-    // only make visible when we have a non-empty title; use visibility to avoid layout flashes
-    stickyText.textContent = title;
-    sticky.style.visibility = show ? 'visible' : 'hidden';
-    sticky.style.opacity = show ? '1' : '0';
-    fadeHeroName(!show);
-  }
 
   // NOTE: removed one-time debug logs to avoid noisy console output in production
 </script>
