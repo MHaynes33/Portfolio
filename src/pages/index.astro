@@ -18,17 +18,19 @@ const projects = [
     --muted: #64748b;
     --accent: #1a73e8;
   }
-  [data-theme="hero"]    { --bg:#0b0f1a; --fg:#e6eefc; --muted:#b3c0d6; }  /* deep navy hero */
-  [data-theme="about"]   { --bg:#111524; --fg:#e6eefc; --muted:#a7b5cc; }
-  [data-theme="sand"]    { --bg:#f4f2ef; --fg:#0f172a; --muted:#6b7280; }  /* sandy cards */
-  [data-theme="slate"]   { --bg:#0b0c10; --fg:#e5e7eb; --muted:#9ca3af; }  /* near-black */
-  [data-theme="contact"] { --bg:#0b0f1a; --fg:#e6eefc; --muted:#b3c0d6; }
+  [data-theme="hero"]    { --bg:#0b0f1a; --fg:#e6eefc; --muted:#b3c0d6; }
+  [data-theme="about"]   { --bg:#0b0f1a; --fg:#e6eefc; --muted:#b3c0d6; }
+  [data-theme="sand"]    { --bg:#f4f2ef; --fg:#0f172a; --muted:#6b7280; }
+  [data-theme="slate"]   { --bg:#f4f2ef; --fg:#0f172a; --muted:#6b7280; }
+  [data-theme="contact"] { --bg:#f4f2ef; --fg:#0f172a; --muted:#6b7280; }
 
   html { scroll-behavior:smooth; background: var(--bg); color: var(--fg); }
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } }
 
   /* Left rail */
   .rail { position:fixed; inset:0 auto 0 0; width:76px; display:flex; flex-direction:column; align-items:center; gap:18px; padding:18px 0; z-index:40; }
+  /* nudge rail down slightly to avoid top-edge crowding */
+  .rail { padding-top:22px; }
   .rail a { color:var(--muted); text-decoration:none; }
   .rail a:hover { opacity:.75; }
   .rail .proj { writing-mode:vertical-rl; transform:rotate(180deg); font-size:12px; letter-spacing:.04em; }
@@ -41,6 +43,19 @@ const projects = [
   .section { min-height:100vh; display:grid; align-items:center; }
   .container { width:100%; max-width:1200px; margin:0 auto; padding:0 1.5rem; }
   .container { transition: color .35s ease, background-color .35s ease; }
+
+  /* Visual card used in project columns */
+  .visual-card { position: relative; width:100%; border-radius: .75rem; overflow:hidden; background:var(--bg); box-shadow: inset 0 12px 30px rgba(2,6,23,0.06); }
+  .visual-card::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.02)); mix-blend-mode: overlay; }
+
+  .meta { color: var(--muted); font-size: .9rem; text-transform: uppercase; letter-spacing: .08em; margin-bottom: .25rem; }
+
+  /* stronger focus ring for rail-accessed headings */
+  .ring-rail:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 6px rgba(26,115,232,0.28);
+    border-radius: .25rem;
+  }
   .h1 { font-size:clamp(2.75rem, 6vw, 5rem); line-height:.95; font-weight:600; letter-spacing:-.01em; }
   .h2 { font-size:clamp(1.25rem, 3vw, 2.25rem); color:var(--muted); }
   .lead { font-size:1.125rem; color:var(--muted); max-width:52ch; }
@@ -61,6 +76,15 @@ const projects = [
     box-shadow: 0 0 0 4px rgba(26,115,232,0.16);
     border-radius: .25rem;
   }
+  /* Page-level color mirroring for sections */
+  html, body { background: var(--bg); color: var(--fg); }
+  .section { background: var(--bg); color: var(--fg); }
+  [data-sentinel]{
+    position: relative;
+    display: block;
+    height: 1px;
+    width: 100%;
+  }
 </style>
 
 <PageLayout>
@@ -79,6 +103,13 @@ const projects = [
     </nav>
   </aside>
 
+  <div id="sticky-title" aria-live="polite"
+       style="position:sticky; top:0; z-index:30; padding:1rem 1.5rem; margin-left:86px; background:transparent; pointer-events:none; opacity:0; transition:opacity .25s ease;">
+    <div style="max-width:1200px; margin:0 auto; font-size:clamp(1.5rem,3vw,2.5rem); font-weight:600;">
+      <!-- Will be filled by JS -->
+    </div>
+  </div>
+
   <!-- MAIN CONTENT -->
   <main class="content">
 
@@ -86,7 +117,7 @@ const projects = [
     <section id="home" class="section pt-24 lg:pt-28" data-theme="hero" data-spy-section>
       <div class="container">
         <p style="color:var(--muted); margin-bottom:.5rem;">2025</p>
-        <h1 class="h1" style="font-size:clamp(3rem, 8vw, 6rem); line-height:.92;">Mike Haynes</h1>
+  <h1 id="hero-name" class="h1" style="font-size:clamp(3rem, 7.5vw, 5.75rem); line-height:.92;">Mike Haynes</h1>
         <h2 class="h2" style="font-size:clamp(1rem, 2.6vw, 1.9rem); font-weight:400; margin-top:.25rem; color:var(--muted);">Business Intelligence · Operational Strategy · Decision Systems</h2>
         <p class="lead" style="margin-top:1.25rem;">
           Builds clear decision systems. Turns messy data into reliable operations.
@@ -107,52 +138,61 @@ const projects = [
         </p>
       </div>
     </section>
+  
 
-    <!-- PROJECT SECTIONS (stubs; we will enrich next step) -->
+  <!-- from here on, be light -->
+  <div data-sentinel data-theme-next="sand" aria-hidden="true"></div>
+
+  <!-- PROJECT SECTIONS (stubs; we will enrich next step) -->
     {projects.map((p, idx) => (
-      <section id={p.id} class="section" data-theme={(idx % 2 === 0) ? 'sand' : 'slate'} data-spy-section>
-        <div class="container grid2" style="gap:0; align-items:center;">
-          {
-            /* For even-index sections show visual column first (visual left, text right) */
-            (idx % 2 === 0) ? (
-              <>
-                <div style="padding:1rem; display:grid; place-items:center;">
-                  <div class="rounded-xl overflow-hidden" style="width:100%; max-width:960px; aspect-ratio:16/9; background:var(--bg); box-shadow: inset 0 12px 30px rgba(2,6,23,0.06);">
-                    <!-- masked visual placeholder -->
-                    <div style="width:100%; height:100%; background:linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.04));"></div>
+      <>
+        <div data-sentinel data-theme-next="sand" aria-hidden="true"></div>
+        <section id={p.id} class="section" data-theme="sand" data-spy-section>
+          <div class="container grid2" style="gap:0; align-items:center;">
+            {
+              /* For even-index sections show visual column first (visual left, text right) */
+              (idx % 2 === 0) ? (
+                <>
+                  <div style="padding:1rem; display:grid; place-items:center;">
+                    <div class="visual-card" style="width:100%; max-width:960px; aspect-ratio:16/9; border-radius:.75rem;">
+                      <!-- masked visual placeholder -->
+                      <div style="width:100%; height:100%; background:linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.04));"></div>
+                    </div>
                   </div>
-                </div>
 
-                <div style="padding:2rem 1.5rem 2rem 1.5rem;">
-                  <p style="color:var(--muted); margin-bottom:.25rem;">{(idx % 2 === 0) ? '2019–2025' : '2024–2025'} &bull; {p.id.replace('-', ' ')}</p>
-                  <h3 class="h1" style="font-size:clamp(2rem,4vw,3.25rem)">{p.title}</h3>
-                  <p class="lead" style="margin-top:1rem; max-width:66ch;">Short summary placeholder. We will add outcomes, metrics, and artifacts in the next step.</p>
-                </div>
-              </>
-            ) : (
-              /* odd-index sections keep text left, visual right */
-              <>
-                <div style="padding:2rem 1.5rem 2rem 1.5rem;">
-                  <p style="color:var(--muted); margin-bottom:.25rem;">{(idx % 2 === 0) ? '2019–2025' : '2024–2025'} &bull; {p.id.replace('-', ' ')}</p>
-                  <h3 class="h1" style="font-size:clamp(2rem,4vw,3.25rem)">{p.title}</h3>
-                  <p class="lead" style="margin-top:1rem; max-width:66ch;">Short summary placeholder. We will add outcomes, metrics, and artifacts in the next step.</p>
-                </div>
-
-                <div style="padding:1rem; display:grid; place-items:center;">
-                  <div class="rounded-xl overflow-hidden" style="width:100%; max-width:960px; aspect-ratio:16/9; background:var(--bg); box-shadow: inset 0 12px 30px rgba(2,6,23,0.06);">
-                    <!-- masked visual placeholder -->
-                    <div style="width:100%; height:100%; background:linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.04));"></div>
+                  <div style="padding:2rem 1.5rem 2rem 1.5rem;">
+                    <p class="meta">2019–2025 &bull; {p.id.replace('-', ' ')}</p>
+                    <h3 class="h1" style="font-size:clamp(2rem,4vw,3.25rem)">{p.title}</h3>
+                    <p class="lead" style="margin-top:1rem; max-width:66ch;">Short summary placeholder. We will add outcomes, metrics, and artifacts in the next step.</p>
                   </div>
-                </div>
-              </>
-            )
-          }
-        </div>
-      </section>
+                </>
+              ) : (
+                /* odd-index sections keep text left, visual right */
+                <>
+                  <div style="padding:2rem 1.5rem 2rem 1.5rem;">
+                    <p style="color:var(--muted); margin-bottom:.25rem;">2024–2025 &bull; {p.id.replace('-', ' ')}</p>
+                    <h3 class="h1" style="font-size:clamp(2rem,4vw,3.25rem)">{p.title}</h3>
+                    <p class="lead" style="margin-top:1rem; max-width:66ch;">Short summary placeholder. We will add outcomes, metrics, and artifacts in the next step.</p>
+                  </div>
+
+                  <div style="padding:1rem; display:grid; place-items:center;">
+                    <div class="rounded-xl overflow-hidden" style="width:100%; max-width:960px; aspect-ratio:16/9; background:var(--bg); box-shadow: inset 0 12px 30px rgba(2,6,23,0.06);">
+                      <!-- masked visual placeholder -->
+                      <div style="width:100%; height:100%; background:linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.04));"></div>
+                    </div>
+                  </div>
+                </>
+              )
+            }
+          </div>
+        </section>
+      </>
     ))}
 
-    <!-- CONTACT -->
-    <section id="contact" class="section" data-theme="contact" data-spy-section>
+  <!-- before contact -->
+  <div data-sentinel data-theme-next="sand" aria-hidden="true"></div>
+  <!-- CONTACT -->
+  <section id="contact" class="section" data-theme="sand" data-spy-section>
       <div class="container">
         <h3 class="h2" style="color:var(--fg);">Contact</h3>
         <p class="lead" style="margin-top:.75rem;">Best way to reach me is email or LinkedIn.</p>
@@ -185,12 +225,7 @@ const projects = [
   // Helper: apply theme from section
   function applyTheme(section) {
     const theme = section.getAttribute('data-theme') || 'hero';
-    // Flip root CSS variables by toggling a data attribute on <body>
     document.body.setAttribute('data-theme', theme);
-    // Mirror variables onto body to actually change bg/fg colors
-    const styles = getComputedStyle(section);
-    document.documentElement.style.backgroundColor = styles.getPropertyValue('--bg');
-    document.documentElement.style.color = styles.getPropertyValue('--fg');
   }
 
   // Intersection Observer for scrollspy + theme shift
@@ -201,16 +236,36 @@ const projects = [
         setActive(id);
         applyTheme(entry.target);
         history.replaceState(null, '', '#' + id); // passive hash update
+  // update sticky title when section becomes active
+  updateStickyTitle(id);
+  console.debug("[spy]", id);
       }
     });
   }, { threshold: [0, 0.55, 1] });
 
   sections.forEach(sec => obs.observe(sec));
 
+  // THEME SENTINEL OBSERVER: flips when a sentinel crosses the top guard line
+  const sentinels = Array.from(document.querySelectorAll('[data-sentinel]'));
+
+  // We want the flip just after a section header clears the top.
+  // Tweak the top offset by changing the first value (e.g., -72px to account for header/rail).
+  const themeObs = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if (!entry.isIntersecting) return;
+      const nextTheme = entry.target.getAttribute('data-theme-next');
+      if (nextTheme){
+        document.body.setAttribute('data-theme', nextTheme);
+      }
+    });
+  }, { root: null, threshold: 0, rootMargin: "-72px 0px 0px 0px" });
+
+  sentinels.forEach(s => themeObs.observe(s));
+
   // On load, set based on current hash or first section
   window.addEventListener('load', () => {
     const current = document.getElementById(location.hash.replace('#','')) || sections[0];
-    if (current) { setActive(current.id); applyTheme(current); }
+    if (current) { setActive(current.id); applyTheme(current); updateStickyTitle(current.id); }
   });
 
   // When a rail link is clicked, smooth-scroll to section and focus its first heading for accessibility
@@ -239,4 +294,29 @@ const projects = [
       });
     }
   });
+
+  // Sticky title map and helper (projects -> title)
+  const map = {};
+  sections.forEach(sec => {
+    const id = sec.id;
+    if (id === 'home' || id === 'about') { map[id] = ''; return; }
+    const titleEl = sec.querySelector('h3,h2,h1');
+    map[id] = titleEl ? titleEl.textContent.trim() : '';
+  });
+  const sticky = document.getElementById('sticky-title');
+  const stickyText = sticky?.firstElementChild;
+  const heroName = document.getElementById('hero-name');
+
+  function fadeHeroName(show){
+    if (heroName) heroName.style.opacity = show ? '1' : '0';
+  }
+
+  function updateStickyTitle(id){
+    if (!sticky || !stickyText) return;
+    const title = map[id] || '';
+    const show = title.length > 0;
+    sticky.style.opacity = show ? '1' : '0';
+    stickyText.textContent = title;
+    fadeHeroName(!show);
+  }
 </script>

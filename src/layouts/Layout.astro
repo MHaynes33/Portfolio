@@ -30,8 +30,8 @@ const { language, textDirection } = I18N;
   <head>
     <CommonMeta />
     <Favicons />
-    <CustomStyles />
-    <ApplyColorMode />
+  <CustomStyles />
+  <!-- <ApplyColorMode /> -->
     <Metadata {...metadata} />
     <SiteVerification />
     <Analytics />
@@ -40,9 +40,8 @@ const { language, textDirection } = I18N;
     <ClientRouter fallback="swap" />
   </head>
 
-  <body class="antialiased text-default bg-page tracking-tight">
+  <body class="antialiased tracking-tight" style="background: var(--bg); color: var(--fg);">
     <slot />
-
     <BasicScripts />
   </body>
 </html>
