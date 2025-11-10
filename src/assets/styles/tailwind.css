@@ -91,16 +91,4 @@
   margin-top: 0;
 }
 
-/* Custom header visibility rules */
-.site-header { pointer-events: auto; }
-@media (min-width: 1024px) { .site-header nav { display: none; } } /* hide top nav on desktop, left rail is primary */
-@media (max-width: 1023.98px) { .site-header nav { display: flex; } } /* show a simple top nav on mobile */
-
-/* Appended: ensure site-header nav visibility rules (idempotent) */
-.site-header { pointer-events: auto; }
-@media (min-width:1024px){ .site-header nav{ display:none; } }
-@media (max-width:1023.98px){ .site-header nav{ display:flex; } }
-
-.site-header { pointer-events:auto; }
-@media (min-width:1024px){ .site-header nav{ display:none; } }
-@media (max-width:1023.98px){ .site-header nav{ display:flex; } }
+/* Header visibility rules moved to `src/components/CustomStyles.astro` to avoid duplication */
