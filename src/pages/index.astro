@@ -18,11 +18,11 @@ const projects = [
     --muted: #64748b;
     --accent: #1a73e8;
   }
-  [data-theme="hero"]    { --bg:#0b0f1a; --fg:#e6eefc; --muted:#b3c0d6; }
-  [data-theme="about"]   { --bg:#0b0f1a; --fg:#e6eefc; --muted:#b3c0d6; }
-  [data-theme="sand"]    { --bg:#f4f2ef; --fg:#0f172a; --muted:#6b7280; }
-  [data-theme="slate"]   { --bg:#f4f2ef; --fg:#0f172a; --muted:#6b7280; }
-  [data-theme="contact"] { --bg:#f4f2ef; --fg:#0f172a; --muted:#6b7280; }
+  :root[data-theme="hero"]    { --bg:#0b0f1a; --fg:#e6eefc; --muted:#b3c0d6; }
+  :root[data-theme="about"]   { --bg:#0b0f1a; --fg:#e6eefc; --muted:#b3c0d6; }
+  :root[data-theme="sand"]    { --bg:#f4f2ef; --fg:#0f172a; --muted:#6b7280; }
+  :root[data-theme="slate"]   { --bg:#f4f2ef; --fg:#0f172a; --muted:#6b7280; }
+  :root[data-theme="contact"] { --bg:#f4f2ef; --fg:#0f172a; --muted:#6b7280; }
 
   html { scroll-behavior:smooth; background: var(--bg); color: var(--fg); }
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } }
@@ -89,7 +89,7 @@ const projects = [
   .theme-curtain {
     position: fixed; inset: 0;
     pointer-events: none;
-    z-index: 60;
+    z-index: 9999;
     opacity: 1;
     transition: opacity .35s ease;
     will-change: opacity;
@@ -98,6 +98,27 @@ const projects = [
   @media (prefers-reduced-motion: reduce) {
     .theme-curtain { transition: none; }
   }
+  /* Ensure smooth transitions for background, color, and borders across sections */
+  body, .section, .container {
+    transition: background-color .35s ease, color .35s ease, border-color .35s ease;
+  }
+  .section-hero { min-height: min(92vh, 820px); padding-top: clamp(5rem, 10vh, 7rem); padding-bottom: clamp(3rem, 8vh, 5rem); }
+  .section-pad  { padding-left: 1.5rem; padding-right: 1.5rem; }
+  @media (min-width: 980px){
+    .section-pad { padding-left: 3rem; padding-right: 3rem; }
+  }
+  /* Type scale + rhythm */
+  :root { --measure: 66ch; }
+  .h0  { font-size: clamp(3.25rem, 9vw, 6rem); line-height: .92; letter-spacing: -0.01em; font-weight: 650; }
+  .h1  { font-size: clamp(2.25rem, 6vw, 3.25rem); line-height: 1.02; letter-spacing: -0.01em; font-weight: 650; }
+  .h2  { font-size: clamp(1.25rem, 3.5vw, 1.75rem); color: var(--muted); }
+  .lead{ font-size: 1.125rem; color: var(--muted); max-width: var(--measure); }
+  .wrap{ width:100%; max-width: 1200px; margin: 0 auto; padding-left: 1.5rem; padding-right: 1.5rem; }
+  @media (min-width: 980px){ .wrap{ padding-left: 3rem; padding-right: 3rem; } }
+
+  /* Section spacing */
+  .section-hero { min-height: min(92vh, 820px); padding-top: clamp(5rem, 10vh, 7rem); padding-bottom: clamp(3rem, 8vh, 5rem); }
+  .section     { padding-top: clamp(3rem, 7vh, 5rem); padding-bottom: clamp(3rem, 7vh, 5rem); }
 </style>
 
 <PageLayout>
@@ -126,12 +147,12 @@ const projects = [
   <!-- MAIN CONTENT -->
   <main class="content">
 
-    <!-- HERO -->
-    <section id="home" class="section pt-24 lg:pt-28" data-theme="hero" data-spy-section>
-      <div class="container">
+  <!-- HERO -->
+    <section id="home" class="section section-hero section-pad" data-theme="hero" data-spy-section>
+      <div class="wrap">
         <p style="color:var(--muted); margin-bottom:.5rem;">2025</p>
-  <h1 id="hero-name" class="h1" style="font-size:clamp(3rem, 7.5vw, 5.75rem); line-height:.92;">Mike Haynes</h1>
-        <h2 class="h2" style="font-size:clamp(1rem, 2.6vw, 1.9rem); font-weight:400; margin-top:.25rem; color:var(--muted);">Business Intelligence · Operational Strategy · Decision Systems</h2>
+  <h1 id="hero-name" class="h0" style="font-size:clamp(3rem, 7.5vw, 5.75rem); line-height:.92;">Mike Haynes</h1>
+    <h2 class="h2" style="font-size:clamp(1rem, 2.6vw, 1.9rem); font-weight:400; margin-top:.25rem; color:var(--muted);">Business Intelligence · Operational Strategy · Decision Systems</h2>
         <p class="lead" style="margin-top:1.25rem;">
           Builds clear decision systems. Turns messy data into reliable operations.
         </p>
@@ -160,13 +181,13 @@ const projects = [
     {projects.map((p, idx) => (
       <>
         <div data-sentinel data-theme-next="sand" aria-hidden="true"></div>
-        <section id={p.id} class="section" data-theme="sand" data-spy-section>
+        <section id={p.id} class="section section-pad" data-theme="sand" data-spy-section>
           <div class="container grid2" style="gap:0; align-items:center;">
             {
               /* For even-index sections show visual column first (visual left, text right) */
               (idx % 2 === 0) ? (
                 <>
-                  <div style="padding:1rem; display:grid; place-items:center;">
+                  <div style="min-height: 48vh; display:grid; place-items:center; padding:0.75rem;">
                     <div class="visual-card" style="width:100%; max-width:960px; aspect-ratio:16/9; border-radius:.75rem;">
                       <!-- masked visual placeholder -->
                       <div style="width:100%; height:100%; background:linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.04));"></div>
@@ -188,7 +209,7 @@ const projects = [
                     <p class="lead" style="margin-top:1rem; max-width:66ch;">Short summary placeholder. We will add outcomes, metrics, and artifacts in the next step.</p>
                   </div>
 
-                  <div style="padding:1rem; display:grid; place-items:center;">
+                  <div style="min-height: 48vh; display:grid; place-items:center; padding:0.75rem;">
                     <div class="rounded-xl overflow-hidden" style="width:100%; max-width:960px; aspect-ratio:16/9; background:var(--bg); box-shadow: inset 0 12px 30px rgba(2,6,23,0.06);">
                       <!-- masked visual placeholder -->
                       <div style="width:100%; height:100%; background:linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.04));"></div>
@@ -235,11 +256,10 @@ const projects = [
     });
   }
 
-  // Helper: apply theme from section
+  // Helper: apply theme from section (instant switch on <html>)
   function applyTheme(section) {
     const theme = section.getAttribute('data-theme') || 'hero';
-    // Use cross-fade helper so theme changes are visually smooth
-    flipTheme(theme);
+    document.documentElement.setAttribute('data-theme', theme);
   }
 
   // cross-fade helper: overlays a curtain with the old color, switches theme underneath, then fades curtain
@@ -254,7 +274,7 @@ const projects = [
     document.body.appendChild(curtain);
 
     // 3) Switch theme UNDER the curtain
-    document.body.setAttribute('data-theme', nextTheme);
+    document.documentElement.setAttribute('data-theme', nextTheme);
 
     // 4) Let browser compute new layout/paint, then fade curtain out
     requestAnimationFrame(() => {
