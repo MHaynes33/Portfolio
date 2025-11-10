@@ -85,6 +85,19 @@ const projects = [
     height: 1px;
     width: 100%;
   }
+  /* Theme curtain (overlays entire viewport during theme change) */
+  .theme-curtain {
+    position: fixed; inset: 0;
+    pointer-events: none;
+    z-index: 60;
+    opacity: 1;
+    transition: opacity .35s ease;
+    will-change: opacity;
+  }
+  /* prefer-reduced-motion: no cross-fade */
+  @media (prefers-reduced-motion: reduce) {
+    .theme-curtain { transition: none; }
+  }
 </style>
 
 <PageLayout>
@@ -225,7 +238,30 @@ const projects = [
   // Helper: apply theme from section
   function applyTheme(section) {
     const theme = section.getAttribute('data-theme') || 'hero';
-    document.body.setAttribute('data-theme', theme);
+    // Use cross-fade helper so theme changes are visually smooth
+    flipTheme(theme);
+  }
+
+  // cross-fade helper: overlays a curtain with the old color, switches theme underneath, then fades curtain
+  function flipTheme(nextTheme){
+    // 1) Snapshot current computed background color
+    const currentBg = getComputedStyle(document.documentElement).backgroundColor;
+
+    // 2) Create a curtain with the OLD color, on top of everything
+    const curtain = document.createElement('div');
+    curtain.className = 'theme-curtain';
+    curtain.style.background = currentBg;
+    document.body.appendChild(curtain);
+
+    // 3) Switch theme UNDER the curtain
+    document.body.setAttribute('data-theme', nextTheme);
+
+    // 4) Let browser compute new layout/paint, then fade curtain out
+    requestAnimationFrame(() => {
+      curtain.style.opacity = '0';
+      // 5) Cleanup after transition
+      curtain.addEventListener('transitionend', () => curtain.remove(), { once: true });
+    });
   }
 
   // Intersection Observer for scrollspy + theme shift
@@ -255,7 +291,7 @@ const projects = [
       if (!entry.isIntersecting) return;
       const nextTheme = entry.target.getAttribute('data-theme-next');
       if (nextTheme){
-        document.body.setAttribute('data-theme', nextTheme);
+        flipTheme(nextTheme);
       }
     });
   }, { root: null, threshold: 0, rootMargin: "-72px 0px 0px 0px" });
