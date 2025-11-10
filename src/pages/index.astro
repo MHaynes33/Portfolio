@@ -1,390 +1,242 @@
 ---
-import Layout from '~/layouts/PageLayout.astro';
+import PageLayout from "../layouts/PageLayout.astro";
 
-import Hero from '~/components/widgets/Hero.astro';
-import Note from '~/components/widgets/Note.astro';
-import Features from '~/components/widgets/Features.astro';
-import Features2 from '~/components/widgets/Features2.astro';
-import Steps from '~/components/widgets/Steps.astro';
-import Content from '~/components/widgets/Content.astro';
-import FAQs from '~/components/widgets/FAQs.astro';
-import Stats from '~/components/widgets/Stats.astro';
-import CallToAction from '~/components/widgets/CallToAction.astro';
-
-const metadata = {
-  title: 'AstroWind — Free template for creating websites with Astro + Tailwind CSS',
-  ignoreTitleTemplate: true,
-};
+// Temporary project list; we will fill real content in the next step.
+const projects = [
+  { id: "credit-risk", title: "Credit-Risk Dashboard 2.0" },
+  { id: "scra",        title: "SCRA Re-amortization" },
+  { id: "ops-cost",    title: "Operational Cost Optimization" },
+  { id: "warehouse",   title: "Data Warehouse POC" },
+];
 ---
 
-<Layout metadata={metadata}>
-  <!-- Hero Widget ******************* -->
+<!-- Local styles for layout + themes -->
+<style>
+  :root {
+    --bg: #ffffff;
+    --fg: #0f172a;
+    --muted: #64748b;
+    --accent: #1a73e8;
+  }
+  [data-theme="hero"]    { --bg:#0b0f1a; --fg:#e6eefc; --muted:#b3c0d6; }  /* deep navy hero */
+  [data-theme="about"]   { --bg:#111524; --fg:#e6eefc; --muted:#a7b5cc; }
+  [data-theme="sand"]    { --bg:#f4f2ef; --fg:#0f172a; --muted:#6b7280; }  /* sandy cards */
+  [data-theme="slate"]   { --bg:#0b0c10; --fg:#e5e7eb; --muted:#9ca3af; }  /* near-black */
+  [data-theme="contact"] { --bg:#0b0f1a; --fg:#e6eefc; --muted:#b3c0d6; }
 
-  <Hero
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Get template',
-        href: 'https://github.com/arthelokyo/astrowind',
-        target: '_blank',
-        icon: 'tabler:download',
-      },
-      { text: 'Learn more', href: '#features' },
-    ]}
-    image={{ src: '~/assets/images/hero-image.png', alt: 'AstroWind Hero Image' }}
-  >
-    <Fragment slot="title">
-      template for <span class="hidden xl:inline">creating websites with</span>
-      <span class="text-accent dark:text-white"> Astro 5.0</span> + Tailwind CSS
-    </Fragment>
+  html { scroll-behavior:smooth; background: var(--bg); color: var(--fg); }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } }
 
-    <Fragment slot="subtitle">
-      <span class="hidden sm:inline">
-        <span class="font-semibold">AstroWind</span> is a free, customizable and production-ready template for Astro 5.0
-        + Tailwind CSS.</span
-      >
-      <span class="block mb-1 sm:hidden font-bold text-blue-600">AstroWind: Production-ready.</span>
-      Suitable for Startups, Small Business, SaaS websites, Professional Portfolios, Marketing websites, Landing Pages &
-      Blogs.
-    </Fragment>
-  </Hero>
+  /* Left rail */
+  .rail { position:fixed; inset:0 auto 0 0; width:76px; display:flex; flex-direction:column; align-items:center; gap:18px; padding:18px 0; z-index:40; }
+  .rail a { color:var(--muted); text-decoration:none; }
+  .rail a:hover { opacity:.75; }
+  .rail .proj { writing-mode:vertical-rl; transform:rotate(180deg); font-size:12px; letter-spacing:.04em; }
+  .grow { flex:1 1 auto; }
 
-  <!-- Note Widget ******************* -->
+  /* Content offset */
+  .content { padding-left:86px; }
 
-  <Note title="Philosophy:" description="Simplicity, Best Practices and High Performance" />
+  /* Sections */
+  .section { min-height:100vh; display:grid; align-items:center; }
+  .container { width:100%; max-width:1200px; margin:0 auto; padding:0 1.5rem; }
+  .container { transition: color .35s ease, background-color .35s ease; }
+  .h1 { font-size:clamp(2.75rem, 6vw, 5rem); line-height:.95; font-weight:600; letter-spacing:-.01em; }
+  .h2 { font-size:clamp(1.25rem, 3vw, 2.25rem); color:var(--muted); }
+  .lead { font-size:1.125rem; color:var(--muted); max-width:52ch; }
+  .btn { display:inline-block; padding:.75rem 1.25rem; border-radius:.5rem; border:1px solid currentColor; }
+  .btn-primary { background:#0f172a; color:#fff; border-color:#0f172a; }
+  .btn-outline { color:var(--fg); }
+  .grid2 { display:grid; grid-template-columns:1fr; }
+  @media (min-width: 980px) { .grid2 { grid-template-columns:1fr 1fr; } }
 
-  <!-- Features Widget *************** -->
+  /* Active state for scrollspy */
+  .is-active { color: var(--accent); font-weight:600; }
 
-  <Features
-    id="features"
-    tagline="Features"
-    title="What you get with AstroWind"
-    subtitle="One of the most professional and comprehensive templates currently on the market. Most starred & forked Astro theme in 2022, 2023 and 2024."
-    items={[
-      {
-        title: 'Astro + Tailwind CSS Integration',
-        description:
-          'A seamless integration between two great frameworks that offer high productivity, performance and versatility.',
-        icon: 'tabler:brand-tailwind',
-      },
-      {
-        title: 'Ready-to-use Components',
-        description:
-          'Widgets made with Tailwind CSS ready to be used in Marketing Websites, SaaS, Blogs, Personal Profiles, Small Business...',
-        icon: 'tabler:components',
-      },
-      {
-        title: 'Best Practices',
-        description:
-          'Creating secure, efficient, and user-friendly websites that deliver exceptional experiences and lasting value.',
-        icon: 'tabler:list-check',
-      },
-      {
-        title: 'Excellent Page Speed',
-        description:
-          'Having a good page speed impacts organic search ranking, improves user experience (UI/UX) and increase conversion rates.',
-        icon: 'tabler:rocket',
-      },
-      {
-        title: 'Search Engine Optimization (SEO)',
-        description:
-          "SEO lies in its ability to enhance a website's visibility, driving organic traffic and enabling it to reach a wider audience.",
-        icon: 'tabler:arrows-right-left',
-      },
-      {
-        title: 'Open to new ideas and contributions',
-        description:
-          'Embracing a culture that is open to new ideas and contributions is integral fostering innovation, collaboration, and a dynamic user experience.',
-        icon: 'tabler:bulb',
-      },
-    ]}
-  />
+  /* Smooth theme transition */
+  body { transition: background-color .35s ease, color .35s ease; }
+  /* Focus ring used when navigating from the left rail for accessibility */
+  .ring-rail:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(26,115,232,0.16);
+    border-radius: .25rem;
+  }
+</style>
 
-  <!-- Content Widget **************** -->
+<PageLayout>
 
-  <Content
-    isReversed
-    tagline="Inside template"
-    title="AstroWind's Blueprint: Fun Meets Functionality!"
-    items={[
-      {
-        title: 'Built on top of Astro 5.0',
-        description:
-          'Benefiting from the performance and developer-friendly features of this modern static site generator.',
-      },
-      {
-        title: 'Styled using Tailwind CSS',
-        description:
-          'Facilitating rapid design and consistent styling with this highly popular utility-first CSS framework.',
-      },
-      {
-        title: 'Cross-browser compatibility',
-        description:
-          'Ensure your website looks and functions consistently across various web browsers, delivering a seamless experience to all users.',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Colorful Image',
-    }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Building on modern foundations</h3>
-      Gain a competitive advantage by incorporating industry leading practices
-    </Fragment>
+  <!-- LEFT RAIL: socials + project list -->
+  <aside class="rail" aria-label="Side navigation">
+    <div class="flex flex-col items-center gap-3 mt-2">
+  <a href="mailto:mikehaynes357@gmail.com" aria-label="Email">@</a>
+      <a href="https://www.linkedin.com/in/mikehaynes" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
+      <a href="https://github.com/MHaynes33" target="_blank" rel="noopener" aria-label="GitHub">gh</a>
+    </div>
+    <div class="grow"></div>
+    <nav class="flex flex-col items-center gap-6 mb-4" aria-label="Projects">
+      {projects.map(p => (<a class="proj" href={`#${p.id}`} data-spy-link>{p.title}</a>))}
+      <a class="proj" href="#contact" data-spy-link>Contact</a>
+    </nav>
+  </aside>
 
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Content>
+  <!-- MAIN CONTENT -->
+  <main class="content">
 
-  <!-- Content Widget **************** -->
+    <!-- HERO -->
+    <section id="home" class="section pt-24 lg:pt-28" data-theme="hero" data-spy-section>
+      <div class="container">
+        <p style="color:var(--muted); margin-bottom:.5rem;">2025</p>
+        <h1 class="h1" style="font-size:clamp(3rem, 8vw, 6rem); line-height:.92;">Mike Haynes</h1>
+        <h2 class="h2" style="font-size:clamp(1rem, 2.6vw, 1.9rem); font-weight:400; margin-top:.25rem; color:var(--muted);">Business Intelligence · Operational Strategy · Decision Systems</h2>
+        <p class="lead" style="margin-top:1.25rem;">
+          Builds clear decision systems. Turns messy data into reliable operations.
+        </p>
+        <div style="margin-top:3rem; margin-bottom:3rem; display:flex; gap:1rem;">
+          <a href="#credit-risk" class="btn btn-primary">View projects</a>
+          <a href="/resume.pdf" class="btn btn-outline">Download résumé</a>
+        </div>
+      </div>
+    </section>
 
-  <Content
-    isAfterContent
-    items={[
-      {
-        title: 'High level of customization',
-        description: `Tailor the template effortlessly to match your brand's identity and requirements, making your website distinct and saving you time.`,
-      },
-      {
-        title: 'Multiple layout possibilities',
-        description:
-          'Explore various layout options to find the structure that best presents your content, enhancing user engagement and navigation.',
-      },
-      {
-        title: 'Fully responsive design',
-        description:
-          "Ensure your website's optimal performance on various devices and screen sizes, providing a consistent and enjoyable user experience.",
-      },
-      {
-        title: 'Integration of media',
-        description:
-          'Seamlessly incorporate images, videos, and multimedia elements that enhance your content and engage visitors effectively.',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1600132806370-bf17e65e942f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2194&q=80',
-      alt: 'Blueprint Image',
-    }}
-  >
-    <Fragment slot="content">Ensure your online presence truly represents you.</Fragment>
+    <!-- ABOUT -->
+    <section id="about" class="section" data-theme="about" data-spy-section>
+      <div class="container">
+        <h3 class="h2" style="color:var(--fg);">About</h3>
+        <p class="lead" style="margin-top:.75rem;">
+          Senior BI and data analyst who ships operational tooling leaders actually use. SQL, Power BI, DAX, Python. Architecture that surfaces risk early and removes noise.
+        </p>
+      </div>
+    </section>
 
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Content>
+    <!-- PROJECT SECTIONS (stubs; we will enrich next step) -->
+    {projects.map((p, idx) => (
+      <section id={p.id} class="section" data-theme={(idx % 2 === 0) ? 'sand' : 'slate'} data-spy-section>
+        <div class="container grid2" style="gap:0; align-items:center;">
+          {
+            /* For even-index sections show visual column first (visual left, text right) */
+            (idx % 2 === 0) ? (
+              <>
+                <div style="padding:1rem; display:grid; place-items:center;">
+                  <div class="rounded-xl overflow-hidden" style="width:100%; max-width:960px; aspect-ratio:16/9; background:var(--bg); box-shadow: inset 0 12px 30px rgba(2,6,23,0.06);">
+                    <!-- masked visual placeholder -->
+                    <div style="width:100%; height:100%; background:linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.04));"></div>
+                  </div>
+                </div>
 
-  <!-- Content Widget **************** -->
+                <div style="padding:2rem 1.5rem 2rem 1.5rem;">
+                  <p style="color:var(--muted); margin-bottom:.25rem;">{(idx % 2 === 0) ? '2019–2025' : '2024–2025'} &bull; {p.id.replace('-', ' ')}</p>
+                  <h3 class="h1" style="font-size:clamp(2rem,4vw,3.25rem)">{p.title}</h3>
+                  <p class="lead" style="margin-top:1rem; max-width:66ch;">Short summary placeholder. We will add outcomes, metrics, and artifacts in the next step.</p>
+                </div>
+              </>
+            ) : (
+              /* odd-index sections keep text left, visual right */
+              <>
+                <div style="padding:2rem 1.5rem 2rem 1.5rem;">
+                  <p style="color:var(--muted); margin-bottom:.25rem;">{(idx % 2 === 0) ? '2019–2025' : '2024–2025'} &bull; {p.id.replace('-', ' ')}</p>
+                  <h3 class="h1" style="font-size:clamp(2rem,4vw,3.25rem)">{p.title}</h3>
+                  <p class="lead" style="margin-top:1rem; max-width:66ch;">Short summary placeholder. We will add outcomes, metrics, and artifacts in the next step.</p>
+                </div>
 
-  <Content
-    isReversed
-    isAfterContent
-    items={[
-      {
-        title: 'Enhanced user engagement',
-        description:
-          'Captivate your audience with interactive elements, intuitive navigation, and visually appealing layouts, encouraging longer visits.',
-      },
-      {
-        title: 'Continuous improvement',
-        description:
-          'Ensure your website stays aligned with the latest trends and technologies through regular updates and enhancements.',
-      },
-      {
-        title: 'Time and resource efficiency',
-        description:
-          'Skip the time-consuming process of building a website from scratch and launch your online presence sooner with AstroWind.',
-      },
-      {
-        title: 'Community support',
-        description: `Join the growing AstroWind community for insights, resources, and assistance, ensuring you're never alone on your web development journey.`,
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1611462985358-60d3498e0364?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Astronauts Image',
-    }}
-  >
-    <Fragment slot="content">Designed to foster growth and success.</Fragment>
+                <div style="padding:1rem; display:grid; place-items:center;">
+                  <div class="rounded-xl overflow-hidden" style="width:100%; max-width:960px; aspect-ratio:16/9; background:var(--bg); box-shadow: inset 0 12px 30px rgba(2,6,23,0.06);">
+                    <!-- masked visual placeholder -->
+                    <div style="width:100%; height:100%; background:linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.04));"></div>
+                  </div>
+                </div>
+              </>
+            )
+          }
+        </div>
+      </section>
+    ))}
 
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Content>
+    <!-- CONTACT -->
+    <section id="contact" class="section" data-theme="contact" data-spy-section>
+      <div class="container">
+        <h3 class="h2" style="color:var(--fg);">Contact</h3>
+        <p class="lead" style="margin-top:.75rem;">Best way to reach me is email or LinkedIn.</p>
+        <div style="margin-top:1rem; display:flex; gap:1.25rem; font-size:1.1rem;">
+          <a href="mailto:mikehaynes357@gmail.com" class="btn btn-outline">mikehaynes357@gmail.com</a>
+          <a href="https://www.linkedin.com/in/mikehaynes" target="_blank" rel="noopener" class="btn btn-outline">LinkedIn</a>
+          <a href="https://github.com/MHaynes33" target="_blank" rel="noopener" class="btn btn-outline">GitHub</a>
+        </div>
+      </div>
+    </section>
 
-  <!-- Steps Widget ****************** -->
+  </main>
+</PageLayout>
 
-  <Steps
-    title="Get your dream website up and running in no time with AstroWind."
-    items={[
-      {
-        title: 'Step 1: <span class="font-medium">Download</span>',
-        description:
-          "Kickstart with GitHub! Either fork the AstroWind template or simply click 'Use this template'. Your canvas awaits, ready for your digital masterpiece. In just a few clicks, you've already set the foundation.",
-        icon: 'tabler:package',
-      },
-      {
-        title: 'Step 2: <span class="font-medium">Add content</span>',
-        description:
-          "Pour your vision into it. Add images, text, and all that jazz to breathe life into your digital space. Remember, it's the content that tells your story, so make it captivating.",
-        icon: 'tabler:letter-case',
-      },
-      {
-        title: 'Step 3: <span class="font-medium">Customize styles</span>',
-        description:
-          'Give it your personal touch. Tailor colors, fonts, and layouts until it feels just right. Your unique flair, amplified by AstroWind! Precision in design ensures a seamless user experience.',
-        icon: 'tabler:paint',
-      },
-      {
-        title: 'Ready!',
-        icon: 'tabler:check',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1616198814651-e71f960c3180?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
-      alt: 'Steps image',
-    }}
-  />
+<!-- Scrollspy + Theme switcher -->
+<script>
+  // Progressive enhancement only
+  const sections = Array.from(document.querySelectorAll('[data-spy-section]'));
+  const links = Array.from(document.querySelectorAll('[data-spy-link]'));
 
-  <!-- Features2 Widget ************** -->
+  // Helper: set active link by hash
+  function setActive(id) {
+    links.forEach(a => {
+      const match = a.getAttribute('href') === ('#' + id);
+      a.classList.toggle('is-active', match);
+      if (match) a.setAttribute('aria-current','true'); else a.removeAttribute('aria-current');
+    });
+  }
 
-  <Features2
-    title="Most used widgets"
-    subtitle="Provides frequently used components for building websites using Tailwind CSS"
-    tagline="Components"
-    items={[
-      {
-        title: 'Headers',
-        description: "Ever tried driving without GPS? Boom! That's why websites need headers for direction.",
-        icon: 'flat-color-icons:template',
-      },
-      {
-        title: 'Heros',
-        description:
-          "Picture a superhero landing – epic, right? That's the job of a Hero section, making grand entrances!",
-        icon: 'flat-color-icons:gallery',
-      },
-      {
-        title: 'Features',
-        description:
-          'Where websites strut their stuff and show off superpowers. No holding back on the bragging rights here!',
-        icon: 'flat-color-icons:approval',
-      },
-      {
-        title: 'Content',
-        description:
-          "Dive into the meat and potatoes of a site; without it, you'd just be window shopping. Content is king.",
-        icon: 'flat-color-icons:document',
-      },
-      {
-        title: 'Call-to-Action',
-        description:
-          'That enthusiastic friend who\'s always urging, "Do it! Do it!"? Yeah, that\'s this button nudging you towards adventure.',
-        icon: 'flat-color-icons:advertising',
-      },
-      {
-        title: 'Pricing',
-        description: 'Behold the dessert menu of the website world. Tempting choices await, can you resist?',
-        icon: 'flat-color-icons:currency-exchange',
-      },
-      {
-        title: 'Testimonial',
-        description: 'Step into the gossip corner! Here, other visitors spill the beans and share the juicy details.',
-        icon: 'flat-color-icons:voice-presentation',
-      },
-      {
-        title: 'Contact',
-        description:
-          'Like a digital mailbox, but faster! Drop a line, ask a question, or send a virtual high-five. Ding! Message in.',
-        icon: 'flat-color-icons:business-contact',
-      },
-      {
-        title: 'Footers',
-        description: "The footer's like the credits of a movie but sprinkled with easter eggs. Time to hunt!",
-        icon: 'flat-color-icons:database',
-      },
-    ]}
-  >
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Features2>
+  // Helper: apply theme from section
+  function applyTheme(section) {
+    const theme = section.getAttribute('data-theme') || 'hero';
+    // Flip root CSS variables by toggling a data attribute on <body>
+    document.body.setAttribute('data-theme', theme);
+    // Mirror variables onto body to actually change bg/fg colors
+    const styles = getComputedStyle(section);
+    document.documentElement.style.backgroundColor = styles.getPropertyValue('--bg');
+    document.documentElement.style.color = styles.getPropertyValue('--fg');
+  }
 
-  <!-- Blog widgets removed for single-page portfolio -->
+  // Intersection Observer for scrollspy + theme shift
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && entry.intersectionRatio > 0.55) {
+        const id = entry.target.id;
+        setActive(id);
+        applyTheme(entry.target);
+        history.replaceState(null, '', '#' + id); // passive hash update
+      }
+    });
+  }, { threshold: [0, 0.55, 1] });
 
-  <!-- FAQs Widget ******************* -->
+  sections.forEach(sec => obs.observe(sec));
 
-  <FAQs
-    title="Frequently Asked Questions"
-    subtitle="Dive into the following questions to gain insights into the powerful features that AstroWind offers and how it can elevate your web development journey."
-    tagline="FAQs"
-    classes={{ container: 'max-w-6xl' }}
-    items={[
-      {
-        title: 'Why AstroWind?',
-        description:
-          "Michael Knight a young loner on a crusade to champion the cause of the innocent. The helpless. The powerless in a world of criminals who operate above the law. Here he comes Here comes Speed Racer. He's a demon on wheels.",
-      },
-      {
-        title: 'What do I need to start?',
-        description:
-          'Space, the final frontier. These are the voyages of the Starship Enterprise. Its five-year mission: to explore strange new worlds. Many say exploration is part of our destiny, but it’s actually our duty to future generations.',
-      },
-      {
-        title: 'How to install the Astro + Tailwind CSS template?',
-        description:
-          "Well, the way they make shows is, they make one show. That show's called a pilot. Then they show that show to the people who make shows, and on the strength of that one show they decide if they're going to make more shows.",
-      },
-      {
-        title: "What's something that you don't understand?",
-        description:
-          "A flower in my garden, a mystery in my panties. Heart attack never stopped old Big Bear. I didn't even know we were calling him Big Bear.",
-      },
-      {
-        title: 'What is something that you would like to try again?',
-        description:
-          "A business big enough that it could be listed on the NASDAQ goes belly up. Disappears! It ceases to exist without me. No, you clearly don't know who you're talking to, so let me clue you in.",
-      },
-      {
-        title: 'If you could only ask one question to each person you meet, what would that question be?',
-        description:
-          "This is not about revenge. This is about justice. A lot of things can change in twelve years, Admiral. Well, that's certainly good to know. About four years. I got tired of hearing how young I looked.",
-      },
-    ]}
-  />
+  // On load, set based on current hash or first section
+  window.addEventListener('load', () => {
+    const current = document.getElementById(location.hash.replace('#','')) || sections[0];
+    if (current) { setActive(current.id); applyTheme(current); }
+  });
 
-  <!-- Stats Widget ****************** -->
-
-  <Stats
-    stats={[
-      { title: 'Downloads', amount: '132K' },
-      { title: 'Stars', amount: '24.8K' },
-      { title: 'Forks', amount: '10.3K' },
-      { title: 'Users', amount: '48.4K' },
-    ]}
-  />
-
-  <!-- CallToAction Widget *********** -->
-
-  <CallToAction
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Get template',
-        href: 'https://github.com/arthelokyo/astrowind',
-        target: '_blank',
-        icon: 'tabler:download',
-      },
-    ]}
-  >
-    <Fragment slot="title">
-      Astro&nbsp;+&nbsp;<br class="block sm:hidden" /><span class="sm:whitespace-nowrap">Tailwind CSS</span>
-    </Fragment>
-
-    <Fragment slot="subtitle">
-      Be very surprised by these huge fake numbers you are seeing on this page. <br class="hidden md:inline" />Don't
-      waste more time! :P
-    </Fragment>
-  </CallToAction>
-</Layout>
+  // When a rail link is clicked, smooth-scroll to section and focus its first heading for accessibility
+  links.forEach((a) => {
+    if (a.closest('.rail')) {
+      a.addEventListener('click', (ev) => {
+        ev.preventDefault();
+        const href = a.getAttribute('href') || '';
+        const id = href.startsWith('#') ? href.slice(1) : null;
+        if (!id) return;
+        const target = document.getElementById(id);
+        if (!target) return;
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        const heading = target.querySelector('h1,h2,h3,h4');
+        if (heading) {
+          // make focusable and add visual ring class
+          heading.setAttribute('tabindex', '-1');
+          heading.classList.add('ring-rail');
+          (heading as HTMLElement).focus();
+          // cleanup after blur
+          heading.addEventListener('blur', () => {
+            heading.removeAttribute('tabindex');
+            heading.classList.remove('ring-rail');
+          }, { once: true });
+        }
+      });
+    }
+  });
+</script>
