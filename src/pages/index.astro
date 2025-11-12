@@ -1,43 +1,38 @@
 ---
 import PageLayout from "../layouts/PageLayout.astro";
 
-// Temporary project list; we will fill real content in the next step.
 const projects = [
   {
     id: "credit-risk",
-    title: "Credit-Risk Dashboard 2.0",
-    year: "2019–2025",
+    title: "Credit-Risk",
     tag: "BI · Risk",
     summary: "Interactive dashboard highlighting borrower credit risk and early warning signals.",
-  hero: "/images/project-credit-risk-1.svg",
-  extra: "/images/project-credit-risk-2.svg",
+    hero: "/images/project-credit-risk-1.svg",
+    extra: "/images/project-credit-risk-2.svg",
   },
   {
     id: "scra",
-    title: "SCRA Re-Amortization",
-    year: "2021–2022",
-    tag: "Operations",
-    summary: "Automated re-Amortization process to manage SCRA loan adjustments at scale.",
-  hero: "/images/project-scra-1.svg",
-  extra: "/images/project-scra-2.svg",
+    title: "SCRA Automation",
+    tag: "Compliance",
+    summary: "Automated re-amortization process to manage SCRA loan adjustments at scale.",
+    hero: "/images/project-scra-1.svg",
+    extra: "/images/project-scra-2.svg",
   },
   {
-    id: "ops-cost",
-    title: "Operational Cost Optimization",
-    year: "2023",
-    tag: "Optimization",
-    summary: "Toolkit and metrics to reduce operational overhead across claims processing.",
-  hero: "/images/project-ops-cost-1.svg",
-  extra: "/images/project-ops-cost-2.svg",
+    id: "underwriting",
+    title: "Underwriting",
+    tag: "Predictive Ops",
+    summary: "Dynamic scoring and throughput metrics to improve underwriting performance.",
+    hero: "/images/project-ops-cost-1.svg",
+    extra: "/images/project-ops-cost-2.svg",
   },
   {
-    id: "warehouse",
-    title: "Data Warehouse POC",
-    year: "2020",
-    tag: "Data",
-    summary: "Proof-of-concept data warehouse centralizing disparate operational sources.",
-  hero: "/images/project-warehouse-1.svg",
-  extra: "/images/project-warehouse-2.svg",
+    id: "peer",
+    title: "Lender",
+    tag: "Strategy",
+    summary: "Executive benchmarking to compare lending performance against peers.",
+    hero: "/images/project-warehouse-1.svg",
+    extra: "/images/project-warehouse-2.svg",
   },
 ];
 ---
@@ -66,9 +61,9 @@ const projects = [
   .rail { position:fixed; inset:0 auto 0 0; width:64px; display:flex; flex-direction:column; align-items:center; gap:12px; padding:18px 0; z-index:50; }
   .rail a { color:var(--muted); text-decoration:none; transition:opacity .2s ease, color .2s ease; }
   .rail a:hover { opacity:.85; }
-  .rail .proj { writing-mode:vertical-rl; transform:rotate(180deg); font-size:11px; line-height:1; letter-spacing:.04em; opacity:.7; max-width:48px; white-space:nowrap; }
+  .rail .proj { writing-mode:vertical-rl; transform:rotate(180deg); line-height:1; letter-spacing:.04em; opacity:.7; max-width:48px; white-space:nowrap; text-align:left; }
   .rail .proj.is-active { opacity:1; color:var(--accent); }
-  .rail .dot { width:6px; height:6px; border-radius:9999px; background:currentColor; opacity:.6; }
+  
   .grow { flex:1 1 auto; }
 
   /* Content offset */
@@ -129,6 +124,240 @@ const projects = [
   body { transition: background-color .35s ease, color .35s ease; }
   body, .section, .container { transition: background-color .35s ease, color .35s ease, border-color .35s ease; }
   [data-sentinel]{ position: relative; display: block; height: 1px; width: 100%; }
+  
+  /* Rail: no scroll bar; keep fixed layout */
+  .rail { overflow: hidden; scrollbar-width: none; }
+  .rail::-webkit-scrollbar { display: none; }
+
+  /* "Work" text: horizontal near bottom */
+  .rail-work {
+    appearance: none; background: transparent; border: 0;
+    color: var(--muted); font-size: 12px; letter-spacing: .04em;
+    cursor: pointer; padding: 0; margin-bottom: 6px;
+    transition: opacity .25s ease, color .25s ease;
+  }
+  .rail-work:hover { color: var(--accent); }
+
+  
+
+  /* Projects group visibility controlled via classes (do not hide via CSS rule) */
+
+  /* Quick fades for swapping states */
+  .fade-out { opacity: 0 !important; transition: opacity .25s ease; }
+  .fade-in  { animation: fadeIn .25s ease forwards; }
+  @keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
+
+/* Rail fits all screens; hide on very small screens */
+.rail { overflow: hidden; }
+@media (max-width: 480px){
+  .rail { display:none; }
+  .content { padding-left: 0; }
+}
+
+/* Work sits directly above the track at the bottom */
+.rail-workwrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+.rail-work {
+  appearance: none; background: transparent; border: 0;
+  color: var(--muted); font-size: 12px; letter-spacing: .04em;
+  cursor: pointer; padding: 0;
+  transition: opacity .22s ease, color .22s ease;
+}
+.rail-work:hover { color: var(--accent); }
+
+/* Short, seamless 1px track — a single bright bar moving down (no ladder) */
+/* Hide rail on very small screens */
+@media (max-width: 480px){
+  .rail { display:none; }
+  .content { padding-left:0; }
+}
+
+/* Compact rotated labels */
+.proj{ writing-mode:vertical-rl; transform:rotate(180deg); font-size:8px; line-height:1; letter-spacing:.03em; opacity:.78; text-align:left; }
+.proj.is-active{ opacity:1; color:var(--accent); }
+
+/* Work button sits directly above indicator */
+.rail-workwrap{ display:flex; flex-direction:column; align-items:center; gap:6px; margin-bottom:8px; }
+.rail-work{
+  appearance:none; background:transparent; border:0; color:var(--muted);
+  font-size:8px; letter-spacing:.04em; cursor:pointer; padding:0;
+  transition:opacity .22s ease, color .22s ease;
+}
+.rail-work:hover{ color:var(--accent); }
+
+/* Scroll indicator — David-style container with dynamic inner element */
+.scroll-indicator{ display:block; width:1px; height:clamp(36px,10vh,72px); overflow:hidden; color:var(--accent); opacity:.95; }
+.scroll-static{ position:relative; width:1px; height:100%; overflow:hidden; }
+.scroll-dynamic{
+  position:absolute; left:0; top:-12px; width:1px; height:12px; background:currentColor;
+  transform:translate3d(0,0,0);
+  /* slightly slower for a smoother motion and small end-fade */
+  animation:railFall 1.8s linear infinite;
+  will-change:transform, opacity; backface-visibility:hidden;
+}
+@keyframes railFall{
+  0%   { transform: translate3d(0, 0, 0); opacity: 1; }
+  92%  { opacity: 1; }
+  100% { transform: translate3d(0, calc(100% + 24px), 0); opacity: 0; } /* seamless wrap (100% + 2x segment) */
+}
+
+/* Visibility utilities */
+.rail-projects.is-hidden{ display:none !important; }
+.rail-workwrap.is-hidden{ display:none !important; }
+
+/* Fades */
+.fade-out{ opacity:0 !important; transition:opacity .18s ease; }
+.fade-in{ animation:fadeIn .18s ease forwards; }
+@keyframes fadeIn{ from{opacity:0} to{opacity:1} }
+
+
+/* Fades for swapping states */
+.fade-out { opacity: 0 !important; transition: opacity .22s ease; }
+.fade-in  { animation: fadeIn .22s ease forwards; }
+@keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
+
+
+  /* Rail must never show its own scrollbar and should fit all screens */
+  .rail { overflow: hidden; }
+  @media (max-width: 480px){
+    /* Hide rail entirely on very small screens */
+    .rail { display: none; }
+    .content { padding-left: 0; }
+  }
+
+  
+
+  /* Project labels: rotated, compact to fit every desktop height */
+  .proj {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-size: 10px;
+    line-height: 1;
+    letter-spacing: .04em;
+    opacity: .78;
+  }
+  .proj.is-active { opacity: 1; color: var(--accent); }
+
+  /* Work sits directly above the track, centered at rail bottom */
+  .rail-workwrap {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    gap: 0px;
+    margin-bottom: 0px;
+  }
+  .rail-work:hover { color: var(--accent); }
+
+  /* SHORT track: only ~10–16% of the rail height; one single bright 1px line */
+  /* We use a pseudo-element that animates down and wraps seamlessly. Pure CSS, no JS. */
+  
+
+  /* Swap states with fades */
+  .fade-out { opacity: 0 !important; transition: opacity .22s ease; }
+  .fade-in  { animation: fadeIn .22s ease forwards; }
+  @keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
+
+  /* Ensure content offset remains correct at all sizes */
+  .content { padding-left: 86px; }
+  @media (max-width: 980px){ .content { padding-left: 64px; } }
+  /* Rail projects visibility classes */
+  .rail-projects { display:grid; grid-template-columns:1fr 1fr; gap:10px; max-height: calc(100vh - 160px); overflow:auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  .rail-projects::-webkit-scrollbar{ display:none; }
+  /* default state before Projects: hidden via a utility class */
+  .rail-projects.is-hidden { display:none !important; }
+
+  /* Work+track group visible by default */
+  .rail-workwrap.is-hidden { display:none !important; }
+
+  /* Ensure no legacy rule keeps projects hidden */
+  .rail-projects[hidden] { display:flex !important; }  /* neutralize stray hidden attr */
+
+  /* Pairs layout: 2-column grid, no scroll */
+  .rail-pairs { display:grid; grid-template-columns:1fr 1fr; gap:10px; max-width:100%; align-items:start; }
+  .pair { display:flex; flex-direction:column; justify-content:space-between; align-items:flex-start; gap:6px; }
+  .pair-sep { display:none; } /* hidden in grid layout */
+
+  /* Make labels fit: responsive clamp and tighter spacing by default */
+  .proj { font-size: clamp(7px, 0.7vw, 8px); letter-spacing: .03em; max-width:44px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; text-align:left; }
+
+  /* Work+track sizing: keep it compact so labels fit even on small heights */
+  /* (replaced by a compact scroll-indicator implementation appended below) */
+
+  /* Visibility control via utility classes */
+  .rail-projects.is-hidden { display:none !important; }
+  .rail-workwrap.is-hidden { display:none !important; }
+
+  /* Make sure any legacy hidden attribute cannot suppress labels */
+  .rail-projects[hidden] { display:flex !important; }
+</style>
+
+<!-- Appended rail/group rules (grouped pairs + Work indicator). See grouping + scripts below. -->
+<style>
+/* Hide rail on very small screens */
+@media (max-width: 480px){
+  .rail { display:none; }
+  .content { padding-left:0; }
+}
+
+/* Compact rotated labels */
+.proj{ writing-mode:vertical-rl; transform:rotate(180deg); font-size:8px; line-height:1; letter-spacing:.03em; opacity:.78; text-align:left; }
+.proj.is-active{ opacity:1; color:var(--accent); }
+
+/* Grouped pairs layout — 2-column grid, no scroll */
+.rail-pairs{ display:grid; grid-template-columns:1fr 1fr; gap:10px; max-width:100%; align-items:start; }
+.pair{ display:flex; flex-direction:column; justify-content:space-between; align-items:flex-start; gap:6px; }
+.pair-sep{ display:none; } /* hidden in grid layout */
+
+/* Fit labels on shorter laptop screens */
+@media (max-height: 800px){
+  .proj{ font-size:7px; }
+  .rail-pairs{ gap:7px; }
+  .pair{ gap:5px; }
+}
+@media (max-height: 700px){
+  .proj{ font-size:7px; }
+  .rail-pairs{ gap:5px; }
+  .pair{ gap:4px; }
+}
+
+/* Work button sits directly above indicator */
+.rail-workwrap{ display:flex; flex-direction:column; align-items:center; gap:6px; margin-bottom:8px; }
+.rail-work{
+  appearance:none; background:transparent; border:0; color:var(--muted);
+  font-size:12px; letter-spacing:.04em; cursor:pointer; padding:0;
+  transition:opacity .22s ease, color .22s ease;
+}
+.rail-work:hover{ color:var(--accent); }
+
+/* Scroll indicator — David-style container with dynamic inner element */
+.scroll-indicator{ display:block; width:1px; height:clamp(36px,10vh,72px); overflow:hidden; color:var(--accent); opacity:.95; }
+.scroll-static{ position:relative; width:1px; height:100%; overflow:hidden; }
+.scroll-dynamic{
+  position:absolute; left:0; top:-12px; width:1px; height:12px; background:currentColor;
+  transform:translate3d(0,0,0);
+  animation:railFall 1.8s linear infinite;
+  will-change:transform, opacity; backface-visibility:hidden;
+}
+@keyframes railFall{
+  0%   { transform: translate3d(0, 0, 0); opacity: 1; }
+  92%  { opacity: 1; }
+  100% { transform: translate3d(0, calc(100% + 24px), 0); opacity: 0; } /* seamless wrap (100% + 2x segment) */
+}
+
+/* Visibility utilities */
+.rail-projects.is-hidden{ display:none !important; }
+.rail-workwrap.is-hidden{ display:none !important; }
+
+/* Fades */
+.fade-out{ opacity:0 !important; transition:opacity .18s ease; }
+.fade-in{ animation:fadeIn .18s ease forwards; }
+@keyframes fadeIn{ from{opacity:0} to{opacity:1} }
+
 </style>
 
 <PageLayout>
@@ -136,13 +365,13 @@ const projects = [
   <!-- LEFT RAIL: socials + project list -->
   <aside class="rail" aria-label="Side navigation">
     <div class="flex flex-col items-center gap-3 mt-2">
-      <a href="mailto:mikehaynes357@gmail.com" aria-label="Email" class="text-muted hover:text-accent">
+  <a href="mailto:%22Mike%20Haynes%22%20%3Cmikehaynes357@gmail.com%3E" aria-label="Email" class="text-muted hover:text-accent">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="1.5" fill="none" />
           <path d="M3 7l9 6 9-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none" />
         </svg>
       </a>
-      <a href="https://www.linkedin.com/in/mikehaynes" target="_blank" rel="noopener" aria-label="LinkedIn (opens in new tab)" class="text-muted hover:text-accent">
+      <a href="https://www.linkedin.com/in/mike-haynes33" target="_blank" rel="noopener" aria-label="LinkedIn (opens in new tab)" class="text-muted hover:text-accent">
         <!-- Local LinkedIn SVG; fill uses currentColor so it matches surrounding text color -->
         <svg width="18" height="18" viewBox="0 0 382 382" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <path fill="currentColor" d="M347.445,0H34.555C15.471,0,0,15.471,0,34.555v312.889C0,366.529,15.471,382,34.555,382h312.889 C366.529,382,382,366.529,382,347.444V34.555C382,15.471,366.529,0,347.445,0z M118.207,329.844c0,5.554-4.502,10.056-10.056,10.056 H65.345c-5.554,0-10.056-4.502-10.056-10.056V150.403c0-5.554,4.502-10.056,10.056-10.056h42.806 c5.554,0,10.056,4.502,10.056,10.056V329.844z M86.748,123.432c-22.459,0-40.666-18.207-40.666-40.666S64.289,42.1,86.748,42.1 s40.666,18.207,40.666,40.666S109.208,123.432,86.748,123.432z M341.91,330.654c0,5.106-4.14,9.246-9.246,9.246H286.73 c-5.106,0-9.246-4.14-9.246-9.246v-84.168c0-12.556,3.683-55.021-32.813-55.021c-28.309,0-34.051,29.066-35.204,42.11v97.079 c0,5.106-4.139,9.246-9.246,9.246h-44.426c-5.106,0-9.246-4.14-9.246-9.246V149.593c0-5.106,4.14-9.246,9.246-9.246h44.426 c5.106,0,9.246,4.14,9.246,9.246v15.655c10.497-15.753,26.097-27.912,59.312-27.912c73.552,0,73.131,68.716,73.131,106.472 L341.91,330.654L341.91,330.654z"/>
@@ -154,16 +383,24 @@ const projects = [
         </svg>
       </a>
     </div>
-  <div class="grow"></div>
-  <div class="dot" aria-hidden="true"></div>
-  <nav class="flex flex-col items-center gap-4 mb-4" aria-label="Projects">
-      <!-- grouped pairs: each pair stacks two project links tightly -->
-      <div class="pair" aria-hidden="false">
+    <div class="grow"></div>
+
+    <!-- Work + scroll indicator (visible before Projects) -->
+    <div class="rail-workwrap" aria-hidden="false">
+      <button id="rail-work" class="rail-work" aria-controls="projects" aria-label="Jump to Work">Work</button>
+      <a href="#projects" class="scroll-indicator" aria-label="Jump to Work">
+        <div class="scroll-static"><div class="scroll-dynamic"></div></div>
+      </a>
+    </div>
+
+    <!-- Project labels (grouped pairs) — initially hidden -->
+    <nav class="rail-projects rail-pairs is-hidden" aria-label="Projects" data-initial-hidden>
+      <div class="pair">
         <a class="proj pair-top" href={`#${projects[0].id}`} data-spy-link>{projects[0].title}</a>
         <a class="proj pair-bottom" href={`#${projects[1].id}`} data-spy-link>{projects[1].title}</a>
       </div>
-      <div style="height:6px; width:1px;" aria-hidden="true"></div>
-      <div class="pair" aria-hidden="false">
+      <div class="pair-sep" aria-hidden="true"></div>
+      <div class="pair">
         <a class="proj pair-top" href={`#${projects[2].id}`} data-spy-link>{projects[2].title}</a>
         <a class="proj pair-bottom" href={`#${projects[3].id}`} data-spy-link>{projects[3].title}</a>
       </div>
@@ -177,21 +414,32 @@ const projects = [
   <main class="content">
 
   <!-- HERO -->
-    <section id="home" class="section section-hero" data-theme="hero" data-spy-section>
-      <div class="wrap">
-  <p style="color:var(--muted); margin-bottom:.5rem;"></p>
-  <h1 id="hero-name" class="h0">Mike Haynes</h1>
-  <h2 class="h2">Business Intelligence · Operational Strategy · Decision Systems</h2>
+    <section id="hero" data-theme="dark" class="section-hero relative overflow-hidden">
+      <div class="container grid grid-cols-1 md:grid-cols-12 gap-x-10">
+        <!-- Left: text -->
+        <div class="md:col-span-7 pt-16 md:pt-24" data-reveal>
+          <h1 class="hero-kicker">2025</h1>
+          <h2 class="hero-title">Mike Haynes</h2>
+          <p class="hero-subtitle">Analytics & Risk Intelligence Leader in Raleigh, NC</p>
 
-  <!-- David-style two-line blurb -->
-  <p class="lead hero-blurb">Business intelligence and operations strategist based in Raleigh.</p>
-  <p class="lead hero-blurb">Senior analyst at Navy Federal, focused on risk dashboards and decision systems leaders actually use.</p>
+          <p class="hero-blurb">
+            Senior analyst at Navy Federal, connecting data science, risk analytics, and executive action.
+          </p>
 
-  <!-- CTA moved lower via .cta margin -->
-  <div class="cta" style="display:flex; gap:1rem; flex-wrap:wrap;">
-    <a href="#credit-risk" class="px-5 py-3 bg-gray-900 text-white rounded">View Projects</a>
-    <a href="/resume.pdf" class="px-5 py-3 border rounded">Download Résumé</a>
-  </div>
+
+          <div class="cta">
+            <a href="#projects" class="btn btn-primary">View Projects</a>
+            <a href="/resume.pdf" class="btn btn-ghost">Download Résumé</a>
+          </div>
+        </div>
+
+        <!-- Right: media placeholder -->
+        <div class="md:col-span-5 mt-12 md:mt-0">
+          <div class="hero-media" aria-hidden="true">
+            <!-- swap later with video/chart—placeholder gradient keeps the layout steady -->
+            <div class="hero-media-frame"></div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -211,13 +459,14 @@ const projects = [
   <div data-sentinel data-theme-next="sand" aria-hidden="true"></div>
 
   <!-- PROJECT SECTIONS -->
+  <div id="projects" aria-hidden="true"></div>
     {projects.map((p, idx) => (
       <section id={p.id} class="section" data-theme="sand" data-spy-section>
         <div class="wrap grid-proj">
           {idx % 2 === 0 ? (
             <>
               <div class="py-10 pr-6">
-                <p class="meta">{p.year} • {p.tag}</p>
+                <p class="meta">{p.tag}</p>
                 <h3 class="h1" style="margin-top:.25rem">{p.title}</h3>
                 <p class="lead" style="margin-top:1rem">{p.summary}</p>
               </div>
@@ -230,7 +479,7 @@ const projects = [
           ) : (
             <>
               <div class="py-10 pr-6 order-2 md:order-1">
-                <p class="meta">{p.year} • {p.tag}</p>
+                <p class="meta">{p.tag}</p>
                 <h3 class="h1" style="margin-top:.25rem">{p.title}</h3>
                 <p class="lead" style="margin-top:1rem">{p.summary}</p>
               </div>
@@ -259,8 +508,8 @@ const projects = [
   <h3 class="h2 reveal" style="color:var(--fg);">Contact</h3>
   <p class="lead reveal" style="margin-top:.75rem;">Best way to reach me is email or LinkedIn.</p>
   <div class="reveal" style="margin-top:1rem; display:flex; gap:1.25rem; font-size:1.1rem;">
-          <a href="mailto:mikehaynes357@gmail.com" class="btn btn-outline">Email</a>
-          <a href="https://www.linkedin.com/in/mikehaynes" target="_blank" rel="noopener" class="btn btn-outline">LinkedIn</a>
+          <a href="mailto:%22Mike%20Haynes%22%20%3Cmikehaynes357@gmail.com%3E" class="btn btn-outline">Email</a>
+          <a href="https://www.linkedin.com/in/mike-haynes33" target="_blank" rel="noopener" class="btn btn-outline">LinkedIn</a>
           <a href="https://github.com/MHaynes33" target="_blank" rel="noopener" class="btn btn-outline">GitHub</a>
         </div>
       </div>
@@ -276,6 +525,7 @@ const projects = [
   const links = Array.from(document.querySelectorAll('[data-spy-link]'));
 
   // Helper: set active link by hash
+  /** @param {string} id */
   function setActive(id) {
     links.forEach(a => {
       const match = a.getAttribute('href') === ('#' + id);
@@ -285,12 +535,15 @@ const projects = [
   }
 
   // Helper: apply theme from section (instant switch on <html>)
+  /** @param {HTMLElement|null} section */
   function applyTheme(section) {
+    if (!section) return;
     const theme = section.getAttribute('data-theme') || 'hero';
     document.documentElement.setAttribute('data-theme', theme);
   }
 
   // cross-fade helper: overlays a curtain with the old color, switches theme underneath, then fades curtain
+  /** @param {string} nextTheme */
   function flipTheme(nextTheme){
     // 1) Snapshot current computed background color
     const currentBg = getComputedStyle(document.documentElement).backgroundColor;
@@ -374,7 +627,7 @@ const projects = [
           // make focusable and add visual ring class
           heading.setAttribute('tabindex', '-1');
           heading.classList.add('ring-rail');
-          (heading as HTMLElement).focus();
+          if (heading instanceof HTMLElement) heading.focus();
           // cleanup after blur
           heading.addEventListener('blur', () => {
             heading.removeAttribute('tabindex');
@@ -386,4 +639,59 @@ const projects = [
   });
 
   // NOTE: removed one-time debug logs to avoid noisy console output in production
+
+  
+
+// Rail state: show labels when Projects is visible; show Work+indicator when Hero is visible or Projects is out (scroll up).
+(function(){
+  const workWrap = document.querySelector('.rail-workwrap');
+  const workBtn  = document.getElementById('rail-work');
+  const indicator= document.querySelector('.scroll-indicator');
+  const labels   = document.querySelector('.rail-projects');
+  const hero     = document.getElementById('hero');
+  const anchor   = document.getElementById('projects');
+
+  // init: respect data-initial-hidden
+  if (labels && labels.hasAttribute('data-initial-hidden')) labels.classList.add('is-hidden');
+  if (workWrap) workWrap.classList.remove('is-hidden');
+
+  function toLabels(){
+    if(!workWrap || !labels) return;
+    labels.classList.remove('is-hidden'); labels.classList.add('fade-in');
+    workWrap.classList.add('fade-out');
+    setTimeout(()=>{ workWrap.classList.add('is-hidden'); workWrap.classList.remove('fade-out'); },160);
+  }
+  function toWork(){
+    if(!workWrap || !labels) return;
+    labels.classList.remove('fade-in'); labels.classList.add('is-hidden');
+  workWrap.classList.remove('is-hidden'); void workWrap.getBoundingClientRect(); // reflow
+  }
+
+  // clicks: jump to projects and swap
+  workBtn?.addEventListener('click',(e)=>{ e.preventDefault(); anchor?.scrollIntoView({behavior:'smooth', block:'start'}); toLabels(); });
+  indicator?.addEventListener('click', ()=>{ toLabels(); });
+
+  if('IntersectionObserver' in window){
+    // Projects visible => labels; if above viewport => Work
+    if(anchor){
+      const ioProjects = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{
+          if(e.isIntersecting) { toLabels(); }
+          else {
+            const rect = anchor.getBoundingClientRect();
+            if(rect.top > 0) toWork(); // Projects scrolled above top => restore Work
+          }
+        });
+      },{ threshold:0.06 });
+      ioProjects.observe(anchor);
+    }
+    // Hero visible => Work (reliable restore at top)
+    if(hero){
+      const ioHero = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{ if(e.isIntersecting) toWork(); });
+      },{ threshold:0.2 });
+      ioHero.observe(hero);
+    }
+  }
+})();
 </script>
