@@ -1,6 +1,6 @@
 site:
   name: "Mike Haynes"
-  site: 'https://mikehaynes.vercel.app'
+  site: 'https://mikehaynesporfolio.com/'
   base: '/'
   trailingSlash: false
 
