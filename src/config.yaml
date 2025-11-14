@@ -1,5 +1,5 @@
 site:
-  name: "Mike Haynes"
+  name: 'Mike Haynes'
   site: 'https://mikehaynesporfolio.com/'
   base: '/'
   trailingSlash: false
@@ -8,26 +8,26 @@ site:
 
 # Author / contact
 author:
-  name: "Mike Haynes"
-  role: "Business Intelligence · Operational Strategy · Decision Systems"
-  summary: "Executive leader who converts complex data into strategic advantage, designs decision systems that scale, and optimizes operations to deliver measurable business outcomes."
-  email: "mikehaynes357@gmail.com"
-  linkedin: "https://www.linkedin.com/in/mike-haynes33"
-  twitter: "https://x.com/HaynesMike65079"
- # instagram: "https://www.instagram.com/mikehaynes1289/"
- # tiktok: "https://www.tiktok.com/@mikehaynes03"
+  name: 'Mike Haynes'
+  role: 'Business Intelligence · Operational Strategy · Decision Systems'
+  summary: 'Executive leader who converts complex data into strategic advantage, designs decision systems that scale, and optimizes operations to deliver measurable business outcomes.'
+  email: 'mikehaynes357@gmail.com'
+  linkedin: 'https://www.linkedin.com/in/mike-haynes33'
+  twitter: 'https://x.com/HaynesMike65079'
+  # instagram: "https://www.instagram.com/mikehaynes1289/"
+  # tiktok: "https://www.tiktok.com/@mikehaynes03"
 
 # Default SEO metadata
 metadata:
   title:
-    default: "Mike Haynes"
+    default: 'Mike Haynes'
     template: '%s — Mike Haynes'
-  description: "Executive leader focused on Business Intelligence, Operational Strategy, and Decision Systems — turning complex data into high-confidence decisions, streamlining operations, and delivering measurable results."
+  description: 'Executive leader focused on Business Intelligence, Operational Strategy, and Decision Systems — turning complex data into high-confidence decisions, streamlining operations, and delivering measurable results.'
   robots:
     index: true
     follow: true
   openGraph:
-    site_name: "Mike Haynes"
+    site_name: 'Mike Haynes'
     images:
       - url: '~/assets/images/default.png'
         width: 1200

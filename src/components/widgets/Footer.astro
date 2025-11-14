@@ -1,31 +1,11 @@
 ---
-import { Icon } from 'astro-icon/components';
-import { SITE } from 'astrowind:config';
-import { getHomePermalink } from '~/utils/permalinks';
-
-interface Link {
-  text?: string;
-  href?: string;
-  ariaLabel?: string;
-  icon?: string;
-}
-
-interface Links {
-  title?: string;
-  links: Array<Link>;
-}
-
 export interface Props {
-  links: Array<Links>;
-  secondaryLinks: Array<Link>;
-  socialLinks: Array<Link>;
   footNote?: string;
   theme?: string;
 }
 
-const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme = 'light' } = Astro.props;
+const { footNote = '', theme = 'light' } = Astro.props;
 const year = new Date().getFullYear();
-
 ---
 
 <footer
@@ -33,7 +13,7 @@ const year = new Date().getFullYear();
   class:list={[{ dark: theme === 'dark' }, 'relative border-t border-gray-200 dark:border-slate-800 not-prose']}
 >
   <div class="dark:bg-dark absolute inset-0 pointer-events-none" aria-hidden="true"></div>
-    <div
+  <div
     class="relative max-w-7xl mx-auto px-4 sm:px-6 dark:text-slate-300 intersect-once intersect-quarter intersect-no-queue motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
   >
     <!-- Top: site purpose + simple nav -->
@@ -46,26 +26,22 @@ const year = new Date().getFullYear();
       <div class="col-span-12 lg:col-span-5 flex lg:justify-end">
         <ul class="flex flex-wrap gap-4 text-sm text-muted dark:text-slate-400">
           <li>
-            <a href="#hero" class="hover:underline hover:text-gray-800 dark:hover:text-slate-100">
-              Top
-            </a>
+            <a href="#hero" class="hover:underline hover:text-gray-800 dark:hover:text-slate-100"> Top </a>
           </li>
           <li>
-            <a href="#projects" class="hover:underline hover:text-gray-800 dark:hover:text-slate-100">
-              Work
-            </a>
+            <a href="#projects" class="hover:underline hover:text-gray-800 dark:hover:text-slate-100"> Work </a>
           </li>
           <li>
-            <a href="#contact" class="hover:underline hover:text-gray-800 dark:hover:text-slate-100">
-              Contact
-            </a>
+            <a href="#contact" class="hover:underline hover:text-gray-800 dark:hover:text-slate-100"> Contact </a>
           </li>
         </ul>
       </div>
     </div>
 
     <!-- Bottom: tiny technical note + optional footnote -->
-    <div class="border-t border-gray-200 dark:border-slate-800 py-5 md:py-6 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+    <div
+      class="border-t border-gray-200 dark:border-slate-800 py-5 md:py-6 flex flex-col md:flex-row md:items-center md:justify-between gap-3"
+    >
       <div class="text-xs text-muted dark:text-slate-400">
         © {year} · Built with Astro & Tailwind. Content adapted for demo and portfolio use only.
       </div>
@@ -74,6 +50,5 @@ const year = new Date().getFullYear();
         {footNote ? <Fragment set:html={footNote} /> : 'This site is always in beta.'}
       </div>
     </div>
-  </div>
   </div>
 </footer>

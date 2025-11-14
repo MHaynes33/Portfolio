@@ -1,80 +1,75 @@
 ---
-import PageLayout from "../layouts/PageLayout.astro";
+import PageLayout from '../layouts/PageLayout.astro';
 
 const projects = [
   {
-    id: "credit-risk",
-    title: "Credit-Risk",
-    tag: "BI · Risk",
-    summary:
-      "Interactive dashboard highlighting borrower credit risk and early warning signals.",
-    hero: "/images/proj-credit-risk-abstract.jpg",
-    extra: "/images/proj-risk-overview.webp",
+    id: 'credit-risk',
+    title: 'Credit-Risk',
+    tag: 'BI · Risk',
+    summary: 'Interactive dashboard highlighting borrower credit risk and early warning signals.',
+    hero: '/images/proj-credit-risk-abstract.jpg',
+    extra: '/images/proj-risk-overview.webp',
   },
   {
-    id: "scra",
-    title: "SCRA Automation",
-    tag: "Compliance",
-    summary:
-      "Automated re-amortization process to manage SCRA loan adjustments at scale.",
-    hero: "/images/proj-laptop-trading.jpg",
-    extra: "/images/proj-program-overview.webp",
+    id: 'scra',
+    title: 'SCRA Automation',
+    tag: 'Compliance',
+    summary: 'Automated re-amortization process to manage SCRA loan adjustments at scale.',
+    hero: '/images/proj-laptop-trading.jpg',
+    extra: '/images/proj-program-overview.webp',
   },
   {
-    id: "underwriting",
-    title: "Underwriting",
-    tag: "Predictive Ops",
-    summary:
-      "Dynamic scoring and throughput metrics to improve underwriting performance.",
-    hero: "/images/proj-ops-analytics.webp",
-    extra: "/images/about-laptop-ambient.jpg",
+    id: 'underwriting',
+    title: 'Underwriting',
+    tag: 'Predictive Ops',
+    summary: 'Dynamic scoring and throughput metrics to improve underwriting performance.',
+    hero: '/images/proj-ops-analytics.webp',
+    extra: '/images/about-laptop-ambient.jpg',
   },
   {
-    id: "peer",
-    title: "Lender",
-    tag: "Strategy",
-    summary:
-      "Executive benchmarking to compare lending performance against peers.",
-    hero: "/images/desk-analyst.jpg",
-    extra: "/images/proj-laptop-trading.jpg",
+    id: 'peer',
+    title: 'Lender',
+    tag: 'Strategy',
+    summary: 'Executive benchmarking to compare lending performance against peers.',
+    hero: '/images/desk-analyst.jpg',
+    extra: '/images/proj-laptop-trading.jpg',
   },
 ];
 
 const projectDetailCopy = {
-  "credit-risk": {
+  'credit-risk': {
     context:
-      "Real estate lending had grown across mortgage and HELOC, but risk reporting was fragmented by product and system. Leaders only saw issues after delinquency spiked.",
+      'Real estate lending had grown across mortgage and HELOC, but risk reporting was fragmented by product and system. Leaders only saw issues after delinquency spiked.',
     solution:
-      "Consolidated origination, performance, and collections data into a single credit-risk view, segmented by product, borrower profile, and geography.",
+      'Consolidated origination, performance, and collections data into a single credit-risk view, segmented by product, borrower profile, and geography.',
     impact:
-      "Gives risk and executive teams an early-warning layer to identify pockets of emerging risk and align pricing, policy, and capacity decisions before losses accelerate.",
+      'Gives risk and executive teams an early-warning layer to identify pockets of emerging risk and align pricing, policy, and capacity decisions before losses accelerate.',
   },
   scra: {
     context:
-      "SCRA rate adjustments were executed through manual spreadsheets and ad-hoc requests, creating operational risk and inconsistent member outcomes.",
+      'SCRA rate adjustments were executed through manual spreadsheets and ad-hoc requests, creating operational risk and inconsistent member outcomes.',
     solution:
-      "Designed an automated re-amortization process that flags eligible loans, recalculates schedules at the SCRA rate cap, and produces clean adjustment files for servicing.",
+      'Designed an automated re-amortization process that flags eligible loans, recalculates schedules at the SCRA rate cap, and produces clean adjustment files for servicing.',
     impact:
-      "Standardizes SCRA processing, reduces review effort for operations and compliance, and improves confidence that eligible members are treated consistently.",
+      'Standardizes SCRA processing, reduces review effort for operations and compliance, and improves confidence that eligible members are treated consistently.',
   },
   underwriting: {
     context:
-      "Underwriting performance was discussed in anecdotes. There was no consistent view of cycle time, quality, or where deals stalled in the pipeline.",
+      'Underwriting performance was discussed in anecdotes. There was no consistent view of cycle time, quality, or where deals stalled in the pipeline.',
     solution:
-      "Built a metrics layer and dashboard for throughput, decision outcomes, and ageing across products, channels, and borrower segments.",
+      'Built a metrics layer and dashboard for throughput, decision outcomes, and ageing across products, channels, and borrower segments.',
     impact:
-      "Equips leaders with a fact-based view of where work slows down, so they can adjust staffing, policy, and handoffs with measurable impact on approval speed and quality.",
+      'Equips leaders with a fact-based view of where work slows down, so they can adjust staffing, policy, and handoffs with measurable impact on approval speed and quality.',
   },
   peer: {
     context:
-      "Executives needed a clear view of how the lending portfolio compares to peers on growth, profitability, and risk appetite.",
+      'Executives needed a clear view of how the lending portfolio compares to peers on growth, profitability, and risk appetite.',
     solution:
-      "Developed a benchmarking view that integrates internal portfolio metrics with peer and market data to position performance against a defined peer set.",
+      'Developed a benchmarking view that integrates internal portfolio metrics with peer and market data to position performance against a defined peer set.',
     impact:
-      "Supports board and strategy discussions with objective context on where the institution is leading, lagging, or intentionally differentiated from peers.",
+      'Supports board and strategy discussions with objective context on where the institution is leading, lagging, or intentionally differentiated from peers.',
   },
 } as const;
-
 ---
 
 <style>
@@ -87,41 +82,56 @@ const projectDetailCopy = {
   }
 
   /* Theme tokens */
-  :root[data-theme="hero"],
-  :root[data-theme="about"],
-  :root[data-theme="dark"] {
-    --bg:#0b0f1a;
-    --fg:#e6eefc;
-    --muted:#b3c0d6;
+  :root[data-theme='hero'],
+  :root[data-theme='about'],
+  :root[data-theme='dark'] {
+    --bg: #0b0f1a;
+    --fg: #e6eefc;
+    --muted: #b3c0d6;
   }
 
-  :root[data-theme="sand"],
-  :root[data-theme="slate"],
-  :root[data-theme="contact"] {
-    --bg:#f4f2ef;
-    --fg:#0f172a;
-    --muted:#6b7280;
+  :root[data-theme='sand'],
+  :root[data-theme='slate'],
+  :root[data-theme='contact'] {
+    --bg: #f4f2ef;
+    --fg: #0f172a;
+    --muted: #6b7280;
   }
 
-  html { scroll-behavior:smooth; }
-  html, body { background: var(--bg); color: var(--fg); }
+  html {
+    scroll-behavior: smooth;
+  }
+  html,
+  body {
+    background: var(--bg);
+    color: var(--fg);
+  }
 
-  body { transition: background-color .55s ease, color .35s ease; }
-  body, .section, .container {
-    transition: background-color .55s ease, color .35s ease, border-color .35s ease;
+  body {
+    transition:
+      background-color 0.55s ease,
+      color 0.35s ease;
+  }
+  body,
+  .section,
+  .container {
+    transition:
+      background-color 0.55s ease,
+      color 0.35s ease,
+      border-color 0.35s ease;
   }
 
   /* Layout */
 
   /* Default section uses theme background */
   /* Default section uses theme background */
-.section {
-  min-height: auto;
-  display: grid;
-  align-items: flex-start;
-  background: var(--bg);
-  color: var(--fg);
-}
+  .section {
+    min-height: auto;
+    display: grid;
+    align-items: flex-start;
+    background: var(--bg);
+    color: var(--fg);
+  }
   /* Override: projects + contact on white, full-bleed under rail */
   .section-project,
   #contact.section {
@@ -133,8 +143,8 @@ const projectDetailCopy = {
     padding-left: 86px;
   }
 
-    /* Centered grey case-study band under each project */
- .project-story-band {
+  /* Centered grey case-study band under each project */
+  .project-story-band {
     background: #f4f4f5;
     margin-top: 3rem;
     margin-bottom: 3rem;
@@ -179,7 +189,7 @@ const projectDetailCopy = {
     width: calc(100% + 86px);
     padding-left: 86px;
   }
- .project-details {
+  .project-details {
     display: grid;
     gap: 2.25rem;
   }
@@ -197,10 +207,10 @@ const projectDetailCopy = {
   .project-label {
     font-size: 0.75rem;
     text-transform: uppercase;
-    letter-spacing: .16em;
+    letter-spacing: 0.16em;
     font-weight: 600;
     color: rgba(15, 23, 42, 0.55);
-    margin-bottom: .35rem;
+    margin-bottom: 0.35rem;
   }
 
   .project-text {
@@ -217,15 +227,14 @@ const projectDetailCopy = {
   }
 
   /* Color bands between projects (full-bleed under rail) */
-    /* Color bands between projects (full-bleed under rail) */
   /* Color bands between projects (full-bleed under rail) */
-.color-break {
-  margin: 6rem 0;
-  margin-left: -86px;
-  width: calc(100% + 86px);
-  padding: 3rem 0;             /* breathing room above/below video */
-}
-
+  /* Color bands between projects (full-bleed under rail) */
+  .color-break {
+    margin: 6rem 0;
+    margin-left: -86px;
+    width: calc(100% + 86px);
+    padding: 3rem 0; /* breathing room above/below video */
+  }
 
   @media (max-width: 980px) {
     .color-break {
@@ -234,12 +243,18 @@ const projectDetailCopy = {
     }
   }
 
-  .color-break--lavender { background: #f3e8ff; }
-  .color-break--rose     { background: #ffd9dd; }
-  .color-break--blue     { background: #dff2ff; }
+  .color-break--lavender {
+    background: #f3e8ff;
+  }
+  .color-break--rose {
+    background: #ffd9dd;
+  }
+  .color-break--blue {
+    background: #dff2ff;
+  }
 
   /* Inner content in color bands */
-    .color-break-inner {
+  .color-break-inner {
     max-width: 1200px;
     height: 100%;
     margin: 0 auto;
@@ -247,16 +262,16 @@ const projectDetailCopy = {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;   /* center horizontally */
-    text-align: center;    /* center text */
+    align-items: center; /* center horizontally */
+    text-align: center; /* center text */
   }
 
   .band-label {
     font-size: 0.75rem;
     text-transform: uppercase;
-    letter-spacing: .16em;
+    letter-spacing: 0.16em;
     color: rgba(15, 23, 42, 0.55);
-    margin-bottom: .5rem;
+    margin-bottom: 0.5rem;
   }
 
   .band-title {
@@ -266,88 +281,118 @@ const projectDetailCopy = {
     max-width: 28ch;
   }
 
-.band-video {
-  margin-top: 1.75rem;
-  max-width: 40rem;
-  margin-inline: auto;
-  border-radius: 18px;
-  overflow: hidden;
-}
+  .band-video {
+    margin-top: 1.75rem;
+    max-width: 40rem;
+    margin-inline: auto;
+    border-radius: 18px;
+    overflow: hidden;
+  }
 
-.band-video video {
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: cover;
-  border-radius: inherit;
-}
+  .band-video video {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    border-radius: inherit;
+  }
   @media (max-width: 640px) {
     .band-title {
       font-size: 1rem;
     }
   }
 
-
   .container {
-    width:100%;
-    max-width:1200px;
-    margin:0 auto;
-    padding:0 1.5rem;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
   }
 
   .wrap {
-    width:100%;
-    max-width:1200px;
-    margin:0 auto;
-    padding:0 1.5rem;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
   }
 
-  @media (min-width: 980px){
-    .wrap{ padding:0 3rem; }
+  @media (min-width: 980px) {
+    .wrap {
+      padding: 0 3rem;
+    }
   }
 
-  .content { padding-left: 86px; }
-  @media (max-width: 980px){
-    .content { padding-left: 64px; }
+  .content {
+    padding-left: 86px;
+  }
+  @media (max-width: 980px) {
+    .content {
+      padding-left: 64px;
+    }
   }
 
   /* Grid / cards */
-  .grid-proj{ display:grid; grid-template-columns:1fr; gap:0; }
-  @media (min-width:980px){ .grid-proj{ grid-template-columns:1fr 1fr; } }
+  .grid-proj {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  @media (min-width: 980px) {
+    .grid-proj {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
 
-.project-media,
-.project-media-wide {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 16px;
-  object-fit: cover;
-}
-/* regular project image (in the grid) */
-.project-media {
-  max-width: 320px;          /* make it smaller on desktop */
-  margin-inline: auto;       /* center within its column */
-}
+  .project-media,
+  .project-media-wide {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 16px;
+    object-fit: cover;
+  }
+  /* regular project image (in the grid) */
+  .project-media {
+    max-width: 320px; /* make it smaller on desktop */
+    margin-inline: auto; /* center within its column */
+  }
 
-/* wide image under the grid */
-.project-media-wide {
-  max-width: 660px;          /* narrower than full bleed */
-  margin-inline: auto;       /* centered under the text */
-}
+  /* wide image under the grid */
+  .project-media-wide {
+    max-width: 660px; /* narrower than full bleed */
+    margin-inline: auto; /* centered under the text */
+  }
   .meta {
     color: var(--muted);
-    letter-spacing: .06em;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
-    font-size: .8rem;
-    margin-bottom: .25rem;
+    font-size: 0.8rem;
+    margin-bottom: 0.25rem;
   }
 
   /* Type scale */
-  .h0{ font-size:clamp(3.25rem,9vw,6rem); line-height:.92; letter-spacing:-.01em; font-weight:650; }
-  .h1{ font-size:clamp(2.25rem,6vw,3.25rem); line-height:1.02; letter-spacing:-.01em; font-weight:650; }
-  .h2{ font-size:clamp(1.25rem,3.5vw,1.75rem); color:var(--muted); }
-  .lead{ font-size:1.125rem; color:var(--muted); max-width:var(--measure); }
-  
+  .h0 {
+    font-size: clamp(3.25rem, 9vw, 6rem);
+    line-height: 0.92;
+    letter-spacing: -0.01em;
+    font-weight: 650;
+  }
+  .h1 {
+    font-size: clamp(2.25rem, 6vw, 3.25rem);
+    line-height: 1.02;
+    letter-spacing: -0.01em;
+    font-weight: 650;
+  }
+  .h2 {
+    font-size: clamp(1.25rem, 3.5vw, 1.75rem);
+    color: var(--muted);
+  }
+  .lead {
+    font-size: 1.125rem;
+    color: var(--muted);
+    max-width: var(--measure);
+  }
+
   /* Shared centered column, aligned with hero */
   .page-column {
     max-width: 48rem;
@@ -358,9 +403,9 @@ const projectDetailCopy = {
   .hero-label {
     font-size: 0.75rem;
     font-weight: 600;
-    color: rgba(244,242,239,0.7);
+    color: rgba(244, 242, 239, 0.7);
     margin-bottom: 1rem;
-    letter-spacing: .08em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
   }
 
@@ -368,54 +413,98 @@ const projectDetailCopy = {
     font-size: clamp(1.4rem, 2.1vw, 2.1rem);
     line-height: 1.2;
     font-weight: 700;
-    color: #f4f2ef;               /* sand color */
+    color: #f4f2ef; /* sand color */
     max-width: 26ch;
     margin: 0 0 2rem;
   }
 
-  @media (max-width: 480px){
-    .h0{ font-size: 2.5rem; }
-    .h1{ font-size: 1.75rem; }
-    .lead{ font-size: 1rem; }
-    .content{ padding-left:60px; }
-    .section-hero{ min-height: 100vh; padding-top: 5rem; padding-bottom: 3rem; }
+  @media (max-width: 480px) {
+    .h0 {
+      font-size: 2.5rem;
+    }
+    .h1 {
+      font-size: 1.75rem;
+    }
+    .lead {
+      font-size: 1rem;
+    }
+    .content {
+      padding-left: 60px;
+    }
+    .section-hero {
+      min-height: 100vh;
+      padding-top: 5rem;
+      padding-bottom: 3rem;
+    }
   }
 
-  .prose { max-width: var(--measure); }
-  .divider { height: 1px; width:100%; background: linear-gradient(to right, transparent, rgba(0,0,0,.08), transparent); margin: 2.5rem 0; }
+  .prose {
+    max-width: var(--measure);
+  }
+  .divider {
+    height: 1px;
+    width: 100%;
+    background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.08), transparent);
+    margin: 2.5rem 0;
+  }
 
-  .reveal { opacity:0; transform: translateY(12px); transition: opacity .4s ease, transform .4s ease; }
-  .reveal.in { opacity:1; transform: translateY(0); }
+  .reveal {
+    opacity: 0;
+    transform: translateY(12px);
+    transition:
+      opacity 0.4s ease,
+      transform 0.4s ease;
+  }
+  .reveal.in {
+    opacity: 1;
+    transform: translateY(0);
+  }
 
   /* Left rail */
   .rail {
-    position:fixed;
-    inset:0 auto 0 0;
-    width:64px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:12px;
-    padding:18px 0;
-    z-index:50;
-    overflow:hidden;
-    scrollbar-width:none;
+    position: fixed;
+    inset: 0 auto 0 0;
+    width: 64px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 0;
+    z-index: 50;
+    overflow: hidden;
+    scrollbar-width: none;
   }
-  .rail::-webkit-scrollbar { display:none; }
+  .rail::-webkit-scrollbar {
+    display: none;
+  }
 
   .rail--at-footer {
     opacity: 0;
     pointer-events: none;
-    transition: opacity .25s ease;
+    transition: opacity 0.25s ease;
   }
 
-  .rail a { color:var(--muted); text-decoration:none; transition:opacity .2s ease, color .2s ease; }
-  .rail a:hover { opacity:.85; }
-  .grow { flex:1 1 auto; }
+  .rail a {
+    color: var(--muted);
+    text-decoration: none;
+    transition:
+      opacity 0.2s ease,
+      color 0.2s ease;
+  }
+  .rail a:hover {
+    opacity: 0.85;
+  }
+  .grow {
+    flex: 1 1 auto;
+  }
 
-  @media (max-width: 480px){
-    .rail { display:none; }
-    .content { padding-left:0; }
+  @media (max-width: 480px) {
+    .rail {
+      display: none;
+    }
+    .content {
+      padding-left: 0;
+    }
   }
 
   /* Project labels / nav — single column */
@@ -429,75 +518,127 @@ const projectDetailCopy = {
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
   }
-  .rail-projects::-webkit-scrollbar{ display:none; }
-  .rail-projects.is-hidden { display:none !important; }
-  .rail-projects[hidden] { display:flex !important; }
+  .rail-projects::-webkit-scrollbar {
+    display: none;
+  }
+  .rail-projects.is-hidden {
+    display: none !important;
+  }
+  .rail-projects[hidden] {
+    display: flex !important;
+  }
 
   /* Project labels */
-  .proj{
-    writing-mode:vertical-rl;
-    transform:rotate(180deg);
-    font-size:8px;
-    line-height:1;
-    letter-spacing:.03em;
-    opacity:.78;
-    max-width:44px;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    text-align:left;
+  .proj {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-size: 8px;
+    line-height: 1;
+    letter-spacing: 0.03em;
+    opacity: 0.78;
+    max-width: 44px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: left;
     color: var(--muted); /* base color */
   }
-  .proj.is-active{
-    opacity:1;
-    color:var(--accent) !important;
+  .proj.is-active {
+    opacity: 1;
+    color: var(--accent) !important;
   }
 
-  @media (max-height: 800px){
-    .proj{ font-size:7px; }
+  @media (max-height: 800px) {
+    .proj {
+      font-size: 7px;
+    }
   }
 
   /* Work button + wrapper */
   .rail-workwrap {
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:6px;
-    margin-bottom:8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 8px;
   }
-  .rail-workwrap.is-hidden{ display:none !important; }
+  .rail-workwrap.is-hidden {
+    display: none !important;
+  }
 
-  .rail-work{
-    appearance:none;
-    background:transparent;
-    border:0;
-    color:var(--muted);
-    font-size:10px;
-    letter-spacing:.04em;
-    cursor:pointer;
-    padding:0;
-    transition:opacity .22s ease, color .22s ease;
+  .rail-work {
+    appearance: none;
+    background: transparent;
+    border: 0;
+    color: var(--muted);
+    font-size: 10px;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    padding: 0;
+    transition:
+      opacity 0.22s ease,
+      color 0.22s ease;
   }
-  .rail-work:hover{ color:var(--accent); }
+  .rail-work:hover {
+    color: var(--accent);
+  }
 
   /* Scroll indicator */
-  .scroll-indicator{ display:block; width:1px; height:clamp(36px,10vh,72px); overflow:hidden; color:var(--accent); opacity:.95; }
-  .scroll-static{ position:relative; width:1px; height:100%; overflow:hidden; }
-  .scroll-dynamic{
-    position:absolute; left:0; top:-12px; width:1px; height:12px; background:currentColor;
-    transform:translate3d(0,0,0);
-    animation:railFall 1.8s linear infinite;
-    will-change:transform, opacity; backface-visibility:hidden;
+  .scroll-indicator {
+    display: block;
+    width: 1px;
+    height: clamp(36px, 10vh, 72px);
+    overflow: hidden;
+    color: var(--accent);
+    opacity: 0.95;
   }
-  @keyframes railFall{
-    0%   { transform: translate3d(0, 0, 0); opacity: 1; }
-    92%  { opacity: 1; }
-    100% { transform: translate3d(0, calc(100% + 24px), 0); opacity: 0; }
+  .scroll-static {
+    position: relative;
+    width: 1px;
+    height: 100%;
+    overflow: hidden;
+  }
+  .scroll-dynamic {
+    position: absolute;
+    left: 0;
+    top: -12px;
+    width: 1px;
+    height: 12px;
+    background: currentColor;
+    transform: translate3d(0, 0, 0);
+    animation: railFall 1.8s linear infinite;
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+  }
+  @keyframes railFall {
+    0% {
+      transform: translate3d(0, 0, 0);
+      opacity: 1;
+    }
+    92% {
+      opacity: 1;
+    }
+    100% {
+      transform: translate3d(0, calc(100% + 24px), 0);
+      opacity: 0;
+    }
   }
 
   /* Theme curtain */
-  .theme-curtain { position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 1; transition: opacity .35s ease; will-change: opacity; }
-  @media (prefers-reduced-motion: reduce) { .theme-curtain { transition: none; } }
+  .theme-curtain {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 1;
+    transition: opacity 0.35s ease;
+    will-change: opacity;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .theme-curtain {
+      transition: none;
+    }
+  }
 
   /* Resume button */
   .resume-btn {
@@ -510,25 +651,51 @@ const projectDetailCopy = {
     border: 0;
     color: var(--muted);
     font-size: 12px;
-    letter-spacing: .04em;
+    letter-spacing: 0.04em;
     cursor: pointer;
     padding: 0;
     margin-bottom: 6px;
-    transition: opacity .25s ease, color .25s ease;
+    transition:
+      opacity 0.25s ease,
+      color 0.25s ease;
     white-space: normal;
     max-width: 50px;
     line-height: 1.2;
     text-align: right;
   }
-  .resume-btn:hover { color: var(--accent); }
-  @media (max-width: 480px) { .resume-btn { top: 12px; right: 1rem; } }
+  .resume-btn:hover {
+    color: var(--accent);
+  }
+  @media (max-width: 480px) {
+    .resume-btn {
+      top: 12px;
+      right: 1rem;
+    }
+  }
 
   /* Sentinel */
-  [data-sentinel]{ position: relative; display: block; height: 1px; width: 100%; }
+  [data-sentinel] {
+    position: relative;
+    display: block;
+    height: 1px;
+    width: 100%;
+  }
 
-  .fade-out{ opacity:0 !important; transition:opacity .22s ease; }
-  .fade-in{ animation:fadeIn .22s ease forwards; }
-  @keyframes fadeIn{ from{opacity:0} to{opacity:1} }
+  .fade-out {
+    opacity: 0 !important;
+    transition: opacity 0.22s ease;
+  }
+  .fade-in {
+    animation: fadeIn 0.22s ease forwards;
+  }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 </style>
 
 <PageLayout>
@@ -543,12 +710,22 @@ const projectDetailCopy = {
         aria-label="Email"
         class="text-muted hover:text-accent"
       >
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
-          xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <rect x="2" y="4" width="20" height="16" rx="2"
-            stroke="currentColor" stroke-width="1.5" fill="none" />
-          <path d="M3 7l9 6 9-6" stroke="currentColor" stroke-width="1.5"
-            stroke-linecap="round" stroke-linejoin="round" fill="none" />
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="1.5" fill="none"></rect>
+          <path
+            d="M3 7l9 6 9-6"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            fill="none"></path>
         </svg>
       </a>
       <a
@@ -558,12 +735,11 @@ const projectDetailCopy = {
         aria-label="LinkedIn"
         class="text-muted hover:text-accent"
       >
-        <svg width="18" height="18" viewBox="0 0 382 382"
-          xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 382 382" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <path
             fill="currentColor"
             d="M347.445,0H34.555C15.471,0,0,15.471,0,34.555v312.889C0,366.529,15.471,382,34.555,382h312.889 C366.529,382,382,366.529,382,347.444V34.555C382,15.471,366.529,0,347.445,0z M118.207,329.844c0,5.554-4.502,10.056-10.056,10.056 H65.345c-5.554,0-10.056-4.502-10.056-10.056V150.403c0-5.554,4.502-10.056,10.056-10.056h42.806 c5.554,0,10.056,4.502,10.056,10.056V329.844z M86.748,123.432c-22.459,0-40.666-18.207-40.666-40.666S64.289,42.1,86.748,42.1 s40.666,18.207,40.666,40.666S109.208,123.432,86.748,123.432z M341.91,330.654c0,5.106-4.14,9.246-9.246,9.246H286.73 c-5.106,0-9.246-4.14-9.246-9.246v-84.168c0-12.556,3.683-55.021-32.813-55.021c-28.309,0-34.051,29.066-35.204,42.11v97.079 c0,5.106-4.139,9.246-9.246,9.246h-44.426c-5.106,0-9.246-4.14-9.246-9.246V149.593c0-5.106,4.14-9.246,9.246-9.246h44.426 c5.106,0,9.246,4.14,9.246,9.246v15.655c10.497-15.753,26.097-27.912,59.312-27.912c73.552,0,73.131,68.716,73.131,106.472 L341.91,330.654L341.91,330.654z"
-          />
+          ></path>
         </svg>
       </a>
       <a
@@ -573,10 +749,17 @@ const projectDetailCopy = {
         aria-label="GitHub"
         class="text-muted hover:text-accent"
       >
-        <svg width="18" height="18" viewBox="0 0 24 24"
-          fill="currentColor" xmlns="http://www.w3.org/2000/svg"
-          aria-hidden="true">
-          <path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.57.11.78-.25.78-.55 0-.27-.01-1.01-.02-1.98-3.2.7-3.88-1.54-3.88-1.54-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.75 1.18 1.75 1.18 1.02 1.76 2.68 1.25 3.33.96.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.27-5.24-5.66 0-1.25.45-2.27 1.18-3.07-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.14 1.17.91-.25 1.89-.38 2.86-.39.97.01 1.95.14 2.86.39 2.18-1.49 3.14-1.17 3.14-1.17.62 1.59.23 2.76.11 3.05.74.8 1.18 1.82 1.18 3.07 0 4.4-2.69 5.37-5.25 5.65.41.35.78 1.04.78 2.1 0 1.52-.01 2.75-.01 3.12 0 .3.21.67.79.56C20.71 21.39 24 17.08 24 12c0-6.27-5.23-11.5-11.5-11.5z" />
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <path
+            d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.57.11.78-.25.78-.55 0-.27-.01-1.01-.02-1.98-3.2.7-3.88-1.54-3.88-1.54-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.75 1.18 1.75 1.18 1.02 1.76 2.68 1.25 3.33.96.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.27-5.24-5.66 0-1.25.45-2.27 1.18-3.07-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.14 1.17.91-.25 1.89-.38 2.86-.39.97.01 1.95.14 2.86.39 2.18-1.49 3.14-1.17 3.14-1.17.62 1.59.23 2.76.11 3.05.74.8 1.18 1.82 1.18 3.07 0 4.4-2.69 5.37-5.25 5.65.41.35.78 1.04.78 2.1 0 1.52-.01 2.75-.01 3.12 0 .3.21.67.79.56C20.71 21.39 24 17.08 24 12c0-6.27-5.23-11.5-11.5-11.5z"
+          ></path>
         </svg>
       </a>
     </div>
@@ -585,14 +768,7 @@ const projectDetailCopy = {
 
     <!-- Work + scroll indicator (visible before Projects) -->
     <div class="rail-workwrap" aria-hidden="false">
-      <button
-        id="rail-work"
-        class="rail-work"
-        aria-controls="projects"
-        aria-label="Jump to Work"
-      >
-        Work
-      </button>
+      <button id="rail-work" class="rail-work" aria-controls="projects" aria-label="Jump to Work"> Work </button>
       <a href="#projects" class="scroll-indicator" aria-label="Jump to Work">
         <div class="scroll-static">
           <div class="scroll-dynamic"></div>
@@ -601,16 +777,14 @@ const projectDetailCopy = {
     </div>
 
     <!-- Project labels — flat list -->
-    <nav
-      class="rail-projects is-hidden"
-      aria-label="Projects"
-      data-initial-hidden
-    >
-      {projects.map((p) => (
-        <a class="proj" href={`#${p.id}`} data-spy-link>
-          {p.title}
-        </a>
-      ))}
+    <nav class="rail-projects is-hidden" aria-label="Projects" data-initial-hidden>
+      {
+        projects.map((p) => (
+          <a class="proj" href={`#${p.id}`} data-spy-link>
+            {p.title}
+          </a>
+        ))
+      }
       <a class="proj" href="#contact" data-spy-link>Contact</a>
     </nav>
   </aside>
@@ -618,20 +792,12 @@ const projectDetailCopy = {
   <!-- MAIN CONTENT -->
   <main class="content">
     <!-- HERO -->
-    <section
-      id="hero"
-      data-theme="dark"
-      data-spy-section
-      class="section-hero relative overflow-hidden"
-    >
+    <section id="hero" data-theme="dark" data-spy-section class="section-hero relative overflow-hidden">
       <div class="container grid grid-cols-1 gap-x-10">
         <div class="pt-16 md:pt-24 page-column" data-reveal>
-
           <p class="hero-label">Mike Haynes</p>
 
-          <h1 class="hero-headline">
-            Analytics & Risk Intelligence Leader based in Raleigh, NC.
-          </h1>
+          <h1 class="hero-headline">Analytics & Risk Intelligence Leader based in Raleigh, NC.</h1>
 
           <h2 class="hero-headline">
             Senior BI analyst at Navy Federal, building predictive credit-risk systems and operational data tooling.
@@ -646,172 +812,105 @@ const projectDetailCopy = {
     <!-- PROJECT SECTIONS -->
     <div id="projects" aria-hidden="true"></div>
 
-       {projects.map((p, idx) => (
-      <Fragment>
-        <section
-          id={p.id}
-          class="section section-project"
-          data-theme="sand"
-          data-spy-section
-        >
-          <div class="wrap grid-proj">
-            {idx % 2 === 0 ? (
-              <>
-                {/* Text left, image right */}
-                <div class="py-10 pr-6">
-                  <p class="meta">{p.tag}</p>
-                  <h3 class="h1" style="margin-top:.25rem">{p.title}</h3>
-                  <p class="lead" style="margin-top:1rem">{p.summary}</p>
-                </div>
-                <div class="py-10 pl-6">
-                  <img
-                    src={p.hero}
-                    alt={`${p.title} hero`}
-                    class="project-media"
-                    loading="lazy"
-                  />
-                </div>
-              </>
-            ) : (
-              <>
-                {/* Image left, text right */}
-                <div class="py-10 pr-6 order-2 md:order-1">
-                  <p class="meta">{p.tag}</p>
-                  <h3 class="h1" style="margin-top:.25rem">{p.title}</h3>
-                  <p class="lead" style="margin-top:1rem">{p.summary}</p>
-                </div>
-                <div class="py-10 pl-6 order-1 md:order-2">
-                  <img
-                    src={p.hero}
-                    alt={`${p.title} hero`}
-                    class="project-media"
-                    loading="lazy"
-                  />
-                </div>
-              </>
-            )}
-          </div>
-
-          {/* wide extra visual under the grid */}
-          <div class="wrap" style="padding-top:1rem">
-            <img
-              src={p.extra}
-              alt={`${p.title} extra`}
-              class="project-media-wide"
-              loading="lazy"
-            />
-          </div>
-
-          {/* centered grey case-study band */}
-          {projectDetailCopy[p.id] && (
-            <div class="project-story-band">
-              <div class="page-column">
-                <div class="project-details">
-                  <div>
-                    <p class="project-label">Context</p>
-                    <p class="project-text">
-                      {projectDetailCopy[p.id].context}
+    {
+      projects.map((p, idx) => (
+        <Fragment>
+          <section id={p.id} class="section section-project" data-theme="sand" data-spy-section>
+            <div class="wrap grid-proj">
+              {idx % 2 === 0 ? (
+                <>
+                  {/* Text left, image right */}
+                  <div class="py-10 pr-6">
+                    <p class="meta">{p.tag}</p>
+                    <h3 class="h1" style="margin-top:.25rem">
+                      {p.title}
+                    </h3>
+                    <p class="lead" style="margin-top:1rem">
+                      {p.summary}
                     </p>
                   </div>
-                  <div>
-                    <p class="project-label">Solution</p>
-                    <p class="project-text">
-                      {projectDetailCopy[p.id].solution}
+                  <div class="py-10 pl-6">
+                    <img src={p.hero} alt={`${p.title} hero`} class="project-media" loading="lazy" />
+                  </div>
+                </>
+              ) : (
+                <>
+                  {/* Image left, text right */}
+                  <div class="py-10 pr-6 order-2 md:order-1">
+                    <p class="meta">{p.tag}</p>
+                    <h3 class="h1" style="margin-top:.25rem">
+                      {p.title}
+                    </h3>
+                    <p class="lead" style="margin-top:1rem">
+                      {p.summary}
                     </p>
                   </div>
-                  <div>
-                    <p class="project-label">Impact</p>
-                    <p class="project-text">
-                      {projectDetailCopy[p.id].impact}
-                    </p>
+                  <div class="py-10 pl-6 order-1 md:order-2">
+                    <img src={p.hero} alt={`${p.title} hero`} class="project-media" loading="lazy" />
+                  </div>
+                </>
+              )}
+            </div>
+
+            {/* wide extra visual under the grid */}
+            <div class="wrap" style="padding-top:1rem">
+              <img src={p.extra} alt={`${p.title} extra`} class="project-media-wide" loading="lazy" />
+            </div>
+
+            {/* centered grey case-study band */}
+            {projectDetailCopy[p.id] && (
+              <div class="project-story-band">
+                <div class="page-column">
+                  <div class="project-details">
+                    <div>
+                      <p class="project-label">Context</p>
+                      <p class="project-text">{projectDetailCopy[p.id].context}</p>
+                    </div>
+                    <div>
+                      <p class="project-label">Solution</p>
+                      <p class="project-text">{projectDetailCopy[p.id].solution}</p>
+                    </div>
+                    <div>
+                      <p class="project-label">Impact</p>
+                      <p class="project-text">{projectDetailCopy[p.id].impact}</p>
+                    </div>
                   </div>
                 </div>
               </div>
+            )}
+          </section>
+
+          {/* Color band between projects (not after the last one) */}
+          {idx < projects.length - 1 && (
+            <div
+              class={`color-break ${
+                idx % 3 === 0 ? 'color-break--lavender' : idx % 3 === 1 ? 'color-break--rose' : 'color-break--blue'
+              }`}
+            >
+              <div class="band-video">
+                {idx === 0 && <video src="/media/hero-abstract-loop.mp4" autoplay loop muted playsinline />}
+
+                {idx === 1 && <video src="/media/hero-office-pan-1.mp4" autoplay loop muted playsinline />}
+
+                {idx === 2 && <video src="/media/hero-office-pan-2.mp4" autoplay loop muted playsinline />}
+              </div>
             </div>
           )}
-        </section>
-
-        {/* Color band between projects (not after the last one) */}
-        {idx < projects.length - 1 && (
-          <div
-            class={`color-break ${
-              idx % 3 === 0
-                ? 'color-break--lavender'
-                : idx % 3 === 1
-                ? 'color-break--rose'
-                : 'color-break--blue'
-            }`}
-          >
-            <div class="band-video">
-              {idx === 0 && (
-                <video
-                  src="/media/hero-abstract-loop.mp4"
-                  autoplay
-                  loop
-                  muted
-                  playsinline
-                ></video>
-              )}
-
-              {idx === 1 && (
-                <video
-                  src="/media/hero-office-pan-1.mp4"
-                  autoplay
-                  loop
-                  muted
-                  playsinline
-                ></video>
-              )}
-
-              {idx === 2 && (
-                <video
-                  src="/media/hero-office-pan-2.mp4"
-                  autoplay
-                  loop
-                  muted
-                  playsinline
-                ></video>
-              )}
-            </div>
-          </div>
-        )}
-      </Fragment>
-    ))}
-
+        </Fragment>
+      ))
+    }
 
     <!-- CONTACT -->
     <section id="contact" class="section" data-theme="light" data-spy-section>
       <div class="container">
         <h3 class="h2 reveal" style="color:var(--fg);">Contact</h3>
-        <p class="lead reveal" style="margin-top:.75rem;">
-          Best way to reach me is email or LinkedIn.
-        </p>
-        <div
-          class="reveal"
-          style="margin-top:1rem; display:flex; gap:1.25rem; font-size:1.1rem;"
-        >
-          <a
-            href="mailto:%22Mike%20Haynes%22%20%3Cmikehaynes357@gmail.com%3E"
-            class="btn btn-outline"
-          >
-            Email
-          </a>
-          <a
-            href="https://www.linkedin.com/in/mike-haynes33"
-            target="_blank"
-            rel="noopener"
-            class="btn btn-outline"
-          >
+        <p class="lead reveal" style="margin-top:.75rem;">Best way to reach me is email or LinkedIn.</p>
+        <div class="reveal" style="margin-top:1rem; display:flex; gap:1.25rem; font-size:1.1rem;">
+          <a href="mailto:%22Mike%20Haynes%22%20%3Cmikehaynes357@gmail.com%3E" class="btn btn-outline"> Email </a>
+          <a href="https://www.linkedin.com/in/mike-haynes33" target="_blank" rel="noopener" class="btn btn-outline">
             LinkedIn
           </a>
-          <a
-            href="https://github.com/MHaynes33"
-            target="_blank"
-            rel="noopener"
-            class="btn btn-outline"
-          >
-            GitHub
-          </a>
+          <a href="https://github.com/MHaynes33" target="_blank" rel="noopener" class="btn btn-outline"> GitHub </a>
         </div>
       </div>
     </section>
@@ -824,10 +923,10 @@ const projectDetailCopy = {
   const links = Array.from(document.querySelectorAll('[data-spy-link]'));
 
   function setActive(id) {
-    links.forEach(a => {
-      const match = a.getAttribute('href') === ('#' + id);
+    links.forEach((a) => {
+      const match = a.getAttribute('href') === '#' + id;
       a.classList.toggle('is-active', match);
-      if (match) a.setAttribute('aria-current','true');
+      if (match) a.setAttribute('aria-current', 'true');
       else a.removeAttribute('aria-current');
     });
   }
@@ -838,7 +937,7 @@ const projectDetailCopy = {
     document.documentElement.setAttribute('data-theme', theme);
   }
 
-  function flipTheme(nextTheme){
+  function flipTheme(nextTheme) {
     const currentBg = getComputedStyle(document.documentElement).backgroundColor;
     const curtain = document.createElement('div');
     curtain.className = 'theme-curtain';
@@ -854,45 +953,62 @@ const projectDetailCopy = {
   }
 
   // Scrollspy observer
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting && entry.intersectionRatio > 0.55) {
-        const id = entry.target.id;
-        setActive(id);
-        applyTheme(entry.target);
-        history.replaceState(null, '', '#' + id);
-        console.debug('[spy]', id);
-      }
-    });
-  }, { threshold: [0, 0.55, 1] });
+  const obs = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && entry.intersectionRatio > 0.55) {
+          const id = entry.target.id;
+          setActive(id);
+          applyTheme(entry.target);
+          history.replaceState(null, '', '#' + id);
+          console.debug('[spy]', id);
+        }
+      });
+    },
+    { threshold: [0, 0.55, 1] }
+  );
 
-  sections.forEach(sec => obs.observe(sec));
+  sections.forEach((sec) => obs.observe(sec));
 
   // Theme sentinel observer
   const sentinels = Array.from(document.querySelectorAll('[data-sentinel]'));
-  const themeObs = new IntersectionObserver((entries)=>{
-    entries.forEach(entry=>{
-      if (!entry.isIntersecting) return;
-      const nextTheme = entry.target.getAttribute('data-theme-next');
-      if (nextTheme){
-        flipTheme(nextTheme);
-      }
-    });
-  }, { root: null, threshold: 0, rootMargin: "-72px 0px 0px 0px" });
+  const themeObs = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const nextTheme = entry.target.getAttribute('data-theme-next');
+        if (nextTheme) {
+          flipTheme(nextTheme);
+        }
+      });
+    },
+    { root: null, threshold: 0, rootMargin: '-72px 0px 0px 0px' }
+  );
 
-  sentinels.forEach(s => themeObs.observe(s));
+  sentinels.forEach((s) => themeObs.observe(s));
 
   // Reveal observer
   const reveals = Array.from(document.querySelectorAll('.reveal'));
-  const revObs = new IntersectionObserver((entries)=>{
-    entries.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); revObs.unobserve(e.target); } });
-  },{ threshold: 0.2 });
-  reveals.forEach(el => revObs.observe(el));
+  const revObs = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          revObs.unobserve(e.target);
+        }
+      });
+    },
+    { threshold: 0.2 }
+  );
+  reveals.forEach((el) => revObs.observe(el));
 
   // On load, set theme based on current hash or first section
   window.addEventListener('load', () => {
-    const current = document.getElementById(location.hash.replace('#','')) || sections[0];
-    if (current) { setActive(current.id); applyTheme(current); }
+    const current = document.getElementById(location.hash.replace('#', '')) || sections[0];
+    if (current) {
+      setActive(current.id);
+      applyTheme(current);
+    }
   });
 
   // Smooth-scroll for rail links
@@ -911,59 +1027,84 @@ const projectDetailCopy = {
           heading.setAttribute('tabindex', '-1');
           heading.classList.add('ring-rail');
           if (heading instanceof HTMLElement) heading.focus();
-          heading.addEventListener('blur', () => {
-            heading.removeAttribute('tabindex');
-            heading.classList.remove('ring-rail');
-          }, { once: true });
+          heading.addEventListener(
+            'blur',
+            () => {
+              heading.removeAttribute('tabindex');
+              heading.classList.remove('ring-rail');
+            },
+            { once: true }
+          );
         }
       });
     }
   });
 
   // Rail state: Work vs labels
-  (function(){
+  (function () {
     const workWrap = document.querySelector('.rail-workwrap');
-    const workBtn  = document.getElementById('rail-work');
-    const indicator= document.querySelector('.scroll-indicator');
-    const labels   = document.querySelector('.rail-projects');
-    const hero     = document.getElementById('hero');
-    const anchor   = document.getElementById('projects');
+    const workBtn = document.getElementById('rail-work');
+    const indicator = document.querySelector('.scroll-indicator');
+    const labels = document.querySelector('.rail-projects');
+    const hero = document.getElementById('hero');
+    const anchor = document.getElementById('projects');
 
     if (labels && labels.hasAttribute('data-initial-hidden')) labels.classList.add('is-hidden');
     if (workWrap) workWrap.classList.remove('is-hidden');
 
-    function toLabels(){
-      if(!workWrap || !labels) return;
-      labels.classList.remove('is-hidden'); labels.classList.add('fade-in');
+    function toLabels() {
+      if (!workWrap || !labels) return;
+      labels.classList.remove('is-hidden');
+      labels.classList.add('fade-in');
       workWrap.classList.add('fade-out');
-      setTimeout(()=>{ workWrap.classList.add('is-hidden'); workWrap.classList.remove('fade-out'); },160);
+      setTimeout(() => {
+        workWrap.classList.add('is-hidden');
+        workWrap.classList.remove('fade-out');
+      }, 160);
     }
-    function toWork(){
-      if(!workWrap || !labels) return;
-      labels.classList.remove('fade-in'); labels.classList.add('is-hidden');
-      workWrap.classList.remove('is-hidden'); void workWrap.getBoundingClientRect();
+    function toWork() {
+      if (!workWrap || !labels) return;
+      labels.classList.remove('fade-in');
+      labels.classList.add('is-hidden');
+      workWrap.classList.remove('is-hidden');
+      void workWrap.getBoundingClientRect();
     }
 
-    workBtn?.addEventListener('click',(e)=>{ e.preventDefault(); anchor?.scrollIntoView({behavior:'smooth', block:'start'}); toLabels(); });
-    indicator?.addEventListener('click', ()=>{ toLabels(); });
+    workBtn?.addEventListener('click', (e) => {
+      e.preventDefault();
+      anchor?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      toLabels();
+    });
+    indicator?.addEventListener('click', () => {
+      toLabels();
+    });
 
-    if('IntersectionObserver' in window){
-      if(anchor){
-        const ioProjects = new IntersectionObserver((entries)=>{
-          entries.forEach(e=>{
-            if(e.isIntersecting) { toLabels(); }
-            else {
-              const rect = anchor.getBoundingClientRect();
-              if(rect.top > 0) toWork();
-            }
-          });
-        },{ threshold:0.06 });
+    if ('IntersectionObserver' in window) {
+      if (anchor) {
+        const ioProjects = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) {
+                toLabels();
+              } else {
+                const rect = anchor.getBoundingClientRect();
+                if (rect.top > 0) toWork();
+              }
+            });
+          },
+          { threshold: 0.06 }
+        );
         ioProjects.observe(anchor);
       }
-      if(hero){
-        const ioHero = new IntersectionObserver((entries)=>{
-          entries.forEach(e=>{ if(e.isIntersecting) toWork(); });
-        },{ threshold:0.2 });
+      if (hero) {
+        const ioHero = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) toWork();
+            });
+          },
+          { threshold: 0.2 }
+        );
         ioHero.observe(hero);
       }
     }
