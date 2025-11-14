@@ -8,7 +8,6 @@ const projects = [
     tag: "BI · Risk",
     summary:
       "Interactive dashboard highlighting borrower credit risk and early warning signals.",
-    // hero + extra: more abstract, analytic feel
     hero: "/images/proj-credit-risk-abstract.jpg",
     extra: "/images/proj-risk-overview.webp",
   },
@@ -18,7 +17,6 @@ const projects = [
     tag: "Compliance",
     summary:
       "Automated re-amortization process to manage SCRA loan adjustments at scale.",
-    // trading-like screen for money movement, plus clean program view
     hero: "/images/proj-laptop-trading.jpg",
     extra: "/images/proj-program-overview.webp",
   },
@@ -28,7 +26,6 @@ const projects = [
     tag: "Predictive Ops",
     summary:
       "Dynamic scoring and throughput metrics to improve underwriting performance.",
-    // dark analytics UI as hero, detailed analytics view as extra
     hero: "/images/proj-ops-analytics.webp",
     extra: "/images/about-laptop-ambient.jpg",
   },
@@ -38,11 +35,45 @@ const projects = [
     tag: "Strategy",
     summary:
       "Executive benchmarking to compare lending performance against peers.",
-    // person-at-desk hero, re-use trading style as wide extra
     hero: "/images/desk-analyst.jpg",
     extra: "/images/proj-laptop-trading.jpg",
   },
 ];
+
+const projectDetailCopy = {
+  "credit-risk": {
+    context:
+      "Real estate lending had grown across mortgage and HELOC, but risk reporting was fragmented by product and system. Leaders only saw issues after delinquency spiked.",
+    solution:
+      "Consolidated origination, performance, and collections data into a single credit-risk view, segmented by product, borrower profile, and geography.",
+    impact:
+      "Gives risk and executive teams an early-warning layer to identify pockets of emerging risk and align pricing, policy, and capacity decisions before losses accelerate.",
+  },
+  scra: {
+    context:
+      "SCRA rate adjustments were executed through manual spreadsheets and ad-hoc requests, creating operational risk and inconsistent member outcomes.",
+    solution:
+      "Designed an automated re-amortization process that flags eligible loans, recalculates schedules at the SCRA rate cap, and produces clean adjustment files for servicing.",
+    impact:
+      "Standardizes SCRA processing, reduces review effort for operations and compliance, and improves confidence that eligible members are treated consistently.",
+  },
+  underwriting: {
+    context:
+      "Underwriting performance was discussed in anecdotes. There was no consistent view of cycle time, quality, or where deals stalled in the pipeline.",
+    solution:
+      "Built a metrics layer and dashboard for throughput, decision outcomes, and ageing across products, channels, and borrower segments.",
+    impact:
+      "Equips leaders with a fact-based view of where work slows down, so they can adjust staffing, policy, and handoffs with measurable impact on approval speed and quality.",
+  },
+  peer: {
+    context:
+      "Executives needed a clear view of how the lending portfolio compares to peers on growth, profitability, and risk appetite.",
+    solution:
+      "Developed a benchmarking view that integrates internal portfolio metrics with peer and market data to position performance against a defined peer set.",
+    impact:
+      "Supports board and strategy discussions with objective context on where the institution is leading, lagging, or intentionally differentiated from peers.",
+  },
+} as const;
 
 ---
 
@@ -83,22 +114,42 @@ const projects = [
   /* Layout */
 
   /* Default section uses theme background */
-  .section {
-    min-height: 100vh;
-    display: grid;
-    align-items: center;
-    background: var(--bg);
-    color: var(--fg);
-  }
-
+  /* Default section uses theme background */
+.section {
+  min-height: auto;
+  display: grid;
+  align-items: flex-start;
+  background: var(--bg);
+  color: var(--fg);
+}
   /* Override: projects + contact on white, full-bleed under rail */
   .section-project,
   #contact.section {
     background: #ffffff;
     color: #0f172a;
     margin-left: -86px;
+    margin-bottom: 2rem;
     width: calc(100% + 86px);
     padding-left: 86px;
+  }
+
+    /* Centered grey case-study band under each project */
+ .project-story-band {
+    background: #f4f4f5;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    margin-left: -86px;
+    width: calc(100% + 86px);
+    padding: 2.75rem 0 3rem;
+    border-top: 1px solid rgba(15, 23, 42, 0.04);
+    border-bottom: 1px solid rgba(15, 23, 42, 0.04);
+  }
+
+  @media (max-width: 480px) {
+    .project-story-band {
+      margin-left: 0;
+      width: 100%;
+    }
   }
 
   @media (max-width: 480px) {
@@ -114,7 +165,7 @@ const projects = [
   .section-project {
     padding-top: 3rem;
     padding-bottom: 5rem;
-    margin-bottom: 20rem;
+    margin-bottom: 5rem;
   }
 
   /* Hero, full screen, full-bleed under rail */
@@ -128,7 +179,35 @@ const projects = [
     width: calc(100% + 86px);
     padding-left: 86px;
   }
+ .project-details {
+    display: grid;
+    gap: 2.25rem;
+  }
 
+  @media (min-width: 768px) {
+    .project-details {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  .project-detail-col {
+    max-width: 26ch; /* keep line length tight */
+  }
+
+  .project-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: .16em;
+    font-weight: 600;
+    color: rgba(15, 23, 42, 0.55);
+    margin-bottom: .35rem;
+  }
+
+  .project-text {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #111827;
+  }
   @media (max-width: 480px) {
     .section-hero {
       margin-left: 0;
@@ -139,12 +218,14 @@ const projects = [
 
   /* Color bands between projects (full-bleed under rail) */
     /* Color bands between projects (full-bleed under rail) */
-  .color-break {
-    height: 260px;
-    margin-bottom: 12rem;
-    margin-left: -86px;
-    width: calc(100% + 86px);
-  }
+  /* Color bands between projects (full-bleed under rail) */
+.color-break {
+  margin: 6rem 0;
+  margin-left: -86px;
+  width: calc(100% + 86px);
+  padding: 3rem 0;             /* breathing room above/below video */
+}
+
 
   @media (max-width: 980px) {
     .color-break {
@@ -158,7 +239,7 @@ const projects = [
   .color-break--blue     { background: #dff2ff; }
 
   /* Inner content in color bands */
-  .color-break-inner {
+    .color-break-inner {
     max-width: 1200px;
     height: 100%;
     margin: 0 auto;
@@ -166,6 +247,8 @@ const projects = [
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;   /* center horizontally */
+    text-align: center;    /* center text */
   }
 
   .band-label {
@@ -183,6 +266,21 @@ const projects = [
     max-width: 28ch;
   }
 
+.band-video {
+  margin-top: 1.75rem;
+  max-width: 40rem;
+  margin-inline: auto;
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.band-video video {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  border-radius: inherit;
+}
   @media (max-width: 640px) {
     .band-title {
       font-size: 1rem;
@@ -217,20 +315,25 @@ const projects = [
   .grid-proj{ display:grid; grid-template-columns:1fr; gap:0; }
   @media (min-width:980px){ .grid-proj{ grid-template-columns:1fr 1fr; } }
 
-  .project-media {
-    width: 100%;
-    height: auto;
-    display: block;
-    object-fit: cover;
-  }
+.project-media,
+.project-media-wide {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 16px;
+  object-fit: cover;
+}
+/* regular project image (in the grid) */
+.project-media {
+  max-width: 320px;          /* make it smaller on desktop */
+  margin-inline: auto;       /* center within its column */
+}
 
-  .project-media-wide {
-    width: 100%;
-    height: auto;
-    display: block;
-    object-fit: cover;
-  }
-
+/* wide image under the grid */
+.project-media-wide {
+  max-width: 660px;          /* narrower than full bleed */
+  margin-inline: auto;       /* centered under the text */
+}
   .meta {
     color: var(--muted);
     letter-spacing: .06em;
@@ -244,6 +347,12 @@ const projects = [
   .h1{ font-size:clamp(2.25rem,6vw,3.25rem); line-height:1.02; letter-spacing:-.01em; font-weight:650; }
   .h2{ font-size:clamp(1.25rem,3.5vw,1.75rem); color:var(--muted); }
   .lead{ font-size:1.125rem; color:var(--muted); max-width:var(--measure); }
+  
+  /* Shared centered column, aligned with hero */
+  .page-column {
+    max-width: 48rem;
+    margin: 0 auto;
+  }
 
   /* Hero text */
   .hero-label {
@@ -392,7 +501,7 @@ const projects = [
 
   /* Resume button */
   .resume-btn {
-    position: fixed;
+    position: absolute;
     top: 18px;
     right: calc(1.5rem + 64px);
     z-index: 40;
@@ -516,7 +625,8 @@ const projects = [
       class="section-hero relative overflow-hidden"
     >
       <div class="container grid grid-cols-1 gap-x-10">
-        <div class="pt-16 md:pt-24 max-w-3xl mx-auto" data-reveal>
+        <div class="pt-16 md:pt-24 page-column" data-reveal>
+
           <p class="hero-label">Mike Haynes</p>
 
           <h1 class="hero-headline">
@@ -536,7 +646,7 @@ const projects = [
     <!-- PROJECT SECTIONS -->
     <div id="projects" aria-hidden="true"></div>
 
-    {projects.map((p, idx) => (
+       {projects.map((p, idx) => (
       <Fragment>
         <section
           id={p.id}
@@ -547,13 +657,13 @@ const projects = [
           <div class="wrap grid-proj">
             {idx % 2 === 0 ? (
               <>
+                {/* Text left, image right */}
                 <div class="py-10 pr-6">
                   <p class="meta">{p.tag}</p>
                   <h3 class="h1" style="margin-top:.25rem">{p.title}</h3>
                   <p class="lead" style="margin-top:1rem">{p.summary}</p>
                 </div>
                 <div class="py-10 pl-6">
-                  <div class="py-10 pl-6">
                   <img
                     src={p.hero}
                     alt={`${p.title} hero`}
@@ -561,17 +671,16 @@ const projects = [
                     loading="lazy"
                   />
                 </div>
-                </div>
               </>
             ) : (
               <>
+                {/* Image left, text right */}
                 <div class="py-10 pr-6 order-2 md:order-1">
                   <p class="meta">{p.tag}</p>
                   <h3 class="h1" style="margin-top:.25rem">{p.title}</h3>
                   <p class="lead" style="margin-top:1rem">{p.summary}</p>
                 </div>
                 <div class="py-10 pl-6 order-1 md:order-2">
-                  <div class="py-10 pl-6 order-1 md:order-2">
                   <img
                     src={p.hero}
                     alt={`${p.title} hero`}
@@ -579,12 +688,11 @@ const projects = [
                     loading="lazy"
                   />
                 </div>
-
-                </div>
               </>
             )}
           </div>
 
+          {/* wide extra visual under the grid */}
           <div class="wrap" style="padding-top:1rem">
             <img
               src={p.extra}
@@ -594,55 +702,85 @@ const projects = [
             />
           </div>
 
-        </section>
-
-            {/* Color band between projects (not after the last one) */}
-          {idx < projects.length - 1 && (
-            <div
-              class={`color-break ${
-                idx % 3 === 0
-                  ? 'color-break--lavender'
-                  : idx % 3 === 1
-                  ? 'color-break--rose'
-                  : 'color-break--blue'
-              }`}
-            >
-              <div class="color-break-inner">
-                {idx === 0 && (
-                  <>
-                    <p class="band-label">Compliance automation</p>
-                    <p class="band-title">
-                      Re-amortizing SCRA loans correctly at scale, with less manual review.
+          {/* centered grey case-study band */}
+          {projectDetailCopy[p.id] && (
+            <div class="project-story-band">
+              <div class="page-column">
+                <div class="project-details">
+                  <div>
+                    <p class="project-label">Context</p>
+                    <p class="project-text">
+                      {projectDetailCopy[p.id].context}
                     </p>
-                  </>
-                )}
-
-                {idx === 1 && (
-                  <>
-                    <p class="band-label">Decisioning & throughput</p>
-                    <p class="band-title">
-                      Turning underwriting speed and quality into metrics leaders can actually act on.
+                  </div>
+                  <div>
+                    <p class="project-label">Solution</p>
+                    <p class="project-text">
+                      {projectDetailCopy[p.id].solution}
                     </p>
-                  </>
-                )}
-
-                {idx === 2 && (
-                  <>
-                    <p class="band-label">Executive benchmarking</p>
-                    <p class="band-title">
-                      Showing where your lending portfolio sits against peers on growth and risk.
+                  </div>
+                  <div>
+                    <p class="project-label">Impact</p>
+                    <p class="project-text">
+                      {projectDetailCopy[p.id].impact}
                     </p>
-                  </>
-                )}
+                  </div>
+                </div>
               </div>
             </div>
           )}
-        </Fragment>
-      ))}
+        </section>
+
+        {/* Color band between projects (not after the last one) */}
+        {idx < projects.length - 1 && (
+          <div
+            class={`color-break ${
+              idx % 3 === 0
+                ? 'color-break--lavender'
+                : idx % 3 === 1
+                ? 'color-break--rose'
+                : 'color-break--blue'
+            }`}
+          >
+            <div class="band-video">
+              {idx === 0 && (
+                <video
+                  src="/media/hero-abstract-loop.mp4"
+                  autoplay
+                  loop
+                  muted
+                  playsinline
+                ></video>
+              )}
+
+              {idx === 1 && (
+                <video
+                  src="/media/hero-office-pan-1.mp4"
+                  autoplay
+                  loop
+                  muted
+                  playsinline
+                ></video>
+              )}
+
+              {idx === 2 && (
+                <video
+                  src="/media/hero-office-pan-2.mp4"
+                  autoplay
+                  loop
+                  muted
+                  playsinline
+                ></video>
+              )}
+            </div>
+          </div>
+        )}
+      </Fragment>
+    ))}
 
 
     <!-- CONTACT -->
-    <section id="contact" class="section" data-theme="sand" data-spy-section>
+    <section id="contact" class="section" data-theme="light" data-spy-section>
       <div class="container">
         <h3 class="h2 reveal" style="color:var(--fg);">Contact</h3>
         <p class="lead reveal" style="margin-top:.75rem;">
